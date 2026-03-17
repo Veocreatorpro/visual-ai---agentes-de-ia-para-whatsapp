@@ -1,0 +1,91 @@
+import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import robotLogo from '../assets/images/robot-logo.png';
+
+export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { href: '#inicio', label: 'Início' },
+    { href: '#solucao', label: 'Solução' },
+    { href: '#integracoes', label: 'Integrações' },
+    { href: '#como-funciona', label: 'Como funciona' },
+    { href: '#contato', label: 'Demonstração' },
+  ];
+
+  return (
+    <header className="fixed top-4 w-full z-50 flex justify-center px-4">
+      <div className={`transition-all duration-300 rounded-full px-5 py-2.5 flex justify-between items-center w-full max-w-5xl ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-lg border border-slate-200/50' : 'bg-white/80 backdrop-blur-sm border border-transparent shadow-sm'}`}>
+        <a href="#" className="flex items-center gap-2 text-lg font-bold text-slate-900">
+          <motion.img 
+            src={robotLogo} 
+            alt="Visual AI" 
+            className="w-8 h-8 rounded-full"
+            animate={{ y: [0, -3, 0] }}
+            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          />
+          Visual AI
+        </a>
+        
+        <nav className="hidden md:block">
+          <ul className="flex gap-5 text-sm">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="text-slate-600 font-medium hover:text-blue-600 transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <a href="#contato" className="px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-600 transition-colors">
+            Falar com especialista
+          </a>
+          <button 
+            className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+          >
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-20 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 p-6 md:hidden z-50"
+          >
+            <ul className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a 
+                    href={link.href} 
+                    className="text-slate-700 font-medium hover:text-blue-600 transition-colors text-base block py-1"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
