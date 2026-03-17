@@ -83,7 +83,7 @@ export default function InteractiveChat() {
         className="bg-white rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden grid md:grid-cols-2 dark:bg-slate-900 dark:shadow-none dark:border-slate-800"
       >
         {/* Left side — Info */}
-        <div className="p-8 md:p-10 bg-gradient-to-b from-slate-50 to-white flex flex-col justify-center gap-6">
+        <div className="p-8 md:p-10 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex flex-col justify-center gap-6">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 dark:text-white">Teste na prática</h2>
             <p className="text-slate-500 text-sm leading-relaxed dark:text-slate-400">
@@ -137,14 +137,14 @@ export default function InteractiveChat() {
             </button>
           </div>
           
-          <div ref={chatContainerRef} className="flex-1 p-3 overflow-y-auto flex flex-col gap-2.5 bg-slate-50/50 scroll-smooth">
+          <div ref={chatContainerRef} className="flex-1 p-3 overflow-y-auto flex flex-col gap-2.5 bg-slate-50/50 dark:bg-slate-800/50 scroll-smooth">
             {messages.map((msg, i) => (
-              <div key={i} className={`max-w-[85%] p-2.5 rounded-2xl text-sm shadow-sm whitespace-pre-line ${ msg.role === 'user' ? 'bg-white text-slate-800 rounded-tr-sm border border-slate-200 self-end' : 'bg-blue-50 border border-blue-100 text-blue-900 rounded-tl-sm self-start' } dark:shadow-none dark:text-slate-100 dark:border-slate-700`}>
+              <div key={i} className={`max-w-[85%] p-2.5 rounded-2xl text-sm shadow-sm whitespace-pre-line ${ msg.role === 'user' ? 'bg-white text-slate-800 rounded-tr-sm border border-slate-200 self-end dark:bg-slate-700 dark:text-white dark:border-slate-600' : 'bg-blue-50 border border-blue-100 text-blue-900 rounded-tl-sm self-start dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-100' } dark:shadow-none`}>
                 {msg.text}
               </div>
             ))}
             {isLoading && (
-              <div className="bg-blue-50 border border-blue-100 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] self-start shadow-sm flex items-center gap-1 dark:shadow-none">
+              <div className="bg-blue-50 border border-blue-100 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] self-start shadow-sm flex items-center gap-1 dark:shadow-none dark:bg-blue-900/30 dark:border-blue-800">
                 <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
                 <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
                 <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />

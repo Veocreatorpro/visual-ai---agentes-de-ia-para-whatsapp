@@ -75,7 +75,7 @@ export default function Hero() {
             {/* Animated Chat Simulation — centered in the panel */}
             <div className="absolute inset-0 flex items-center justify-center p-6">
               <div className="w-full max-w-[320px]">
-                <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 overflow-hidden">
+                <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 dark:border-slate-700/50 overflow-hidden">
                   {/* Chat header */}
                   <div className="flex items-center gap-2.5 p-3 border-b border-slate-100 bg-white dark:border-slate-800 dark:bg-slate-900">
                     <div className="w-9 h-9 bg-green-500 text-white rounded-full flex items-center justify-center shadow-sm dark:shadow-none">
@@ -90,7 +90,7 @@ export default function Hero() {
                     </div>
                   </div>
                   {/* Chat messages */}
-                  <div className="p-3 space-y-2 min-h-[160px] max-h-[200px] overflow-hidden">
+                  <div className="p-3 space-y-2 min-h-[160px] max-h-[200px] overflow-hidden bg-white dark:bg-slate-800/50">
                     <AnimatePresence>
                       {chatMessages.slice(0, visibleMessages).map((msg, i) => (
                         <motion.div
@@ -98,7 +98,7 @@ export default function Hero() {
                           initial={{ opacity: 0, y: 10, scale: 0.95 }}
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           transition={{ duration: 0.3 }}
-                          className={`text-[11px] leading-relaxed p-2 rounded-lg max-w-[88%] ${ msg.role === 'user' ? 'bg-slate-100 text-slate-800 rounded-tr-sm ml-auto' : 'bg-blue-50 border border-blue-100 text-blue-900 rounded-tl-sm' } dark:text-slate-100`}
+                          className={`text-[11px] leading-relaxed p-2 rounded-lg max-w-[88%] ${ msg.role === 'user' ? 'bg-slate-100 text-slate-800 rounded-tr-sm ml-auto dark:bg-slate-700 dark:text-white' : 'bg-blue-50 border border-blue-100 text-blue-900 rounded-tl-sm dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-100' }`}
                         >
                           {msg.text}
                         </motion.div>
