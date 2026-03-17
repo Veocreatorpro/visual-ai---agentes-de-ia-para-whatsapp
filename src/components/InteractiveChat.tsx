@@ -4,8 +4,7 @@ import { Send, MessageCircle, RotateCw } from 'lucide-react';
 import robotLogo from '../assets/images/robot-logo.svg';
 
 // Use relative URL so Vite proxy handles it in dev
-const API_URL = '';
-
+const API_URL = import.meta.env.DEV ? '' : 'https://visualai-whatsapp-api-1.azurewebsites.net';
 export default function InteractiveChat() {
   const [messages, setMessages] = useState<{role: 'user' | 'agent', text: string}[]>([
     { role: 'agent', text: 'Olá! Sou o agente virtual da Visual AI. 🤖\n\nSimule um cliente: "Quanto custa trocar a tela do iPhone 13?"' }
