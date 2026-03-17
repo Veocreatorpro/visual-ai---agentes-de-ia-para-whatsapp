@@ -1,4 +1,3 @@
-```
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Send, MessageCircle, RotateCw } from 'lucide-react';
