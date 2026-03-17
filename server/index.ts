@@ -55,8 +55,18 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
 });
 
 app.listen(PORT, () => {
-  console.log(`\n🛡️  Visual AI Server — Port ${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
   console.log(`   Azure: ${process.env.AZURE_OPENAI_ENDPOINT ? '✅' : '⚠️  Not configured'}\n`);
+});
+
+// 🚨 Global Error Handlers for Azure Debugging
+process.on('uncaughtException', (err) => {
+  console.error('🔥 Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(' Unhandled Rejection at:', promise, 'reason:', reason);
 });
 
 export default app;
