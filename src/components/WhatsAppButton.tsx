@@ -10,8 +10,7 @@ export default function WhatsAppButton() {
   const [robotVisible, setRobotVisible] = useState(false);
 
   useEffect(() => {
-    // Runs the animation every 60 seconds
-    const intervalId = setInterval(() => {
+    const triggerAnimation = () => {
       setRobotVisible(true);
       
       // T=2.0s: Robot reaches the button, trigger button press
@@ -25,10 +24,22 @@ export default function WhatsAppButton() {
       setTimeout(() => {
         setRobotVisible(false);
       }, 4000);
-      
-    }, 60000);
+    };
 
-    return () => clearInterval(intervalId);
+    // Trigger initial animation shortly after page load so user sees it
+    const initialTimer = setTimeout(() => {
+      triggerAnimation();
+    }, 5000);
+
+    // Runs the animation every 30 seconds
+    const intervalId = setInterval(() => {
+      triggerAnimation();
+    }, 30000);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(intervalId);
+    };
   }, []);
 
   return (
@@ -38,10 +49,10 @@ export default function WhatsAppButton() {
           <motion.img
             src={robotLogo}
             alt="AI Robot"
-            className="fixed bottom-7 z-40 drop-shadow-xl pointer-events-none w-14 h-14"
-            initial={{ right: 200, opacity: 0 }}
+            className="fixed bottom-7 right-6 z-40 drop-shadow-xl pointer-events-none w-14 h-14"
+            initial={{ x: 150, opacity: 0 }}
             animate={{
-              right: [200, 80, 80, 200],
+              x: [150, 40, 40, 150], // Robot walks left towards the button (offset relative to right-6), stays, walks right
               opacity: [0, 1, 1, 0], // fades in, stays, fades out
               y: [0, -15, 0, -10, 0, -15, 0], // bouncy walk effect
               rotate: [0, 5, -5, 10, -10, 0] // waddle effect
@@ -61,7 +72,7 @@ export default function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 text-white font-bold text-sm rounded-full shadow-lg shadow-green-500/30 transition-all group"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 text-white font-bold text-sm rounded-full shadow-lg shadow-green-500/30 transition-all group pointer-events-auto"
         initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={{ 
           opacity: 1, 

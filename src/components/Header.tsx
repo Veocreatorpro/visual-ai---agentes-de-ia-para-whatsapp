@@ -40,7 +40,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-4 w-full z-50 flex justify-center px-4">
-      <div className={`transition-all duration-300 rounded-full px-5 py-2.5 flex justify-between items-center w-full max-w-5xl${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-slate-700/50' : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-transparent shadow-sm'}`}>
+      <div className={`transition-all duration-300 rounded-full px-5 py-2.5 flex justify-between items-center w-full max-w-5xl ${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-slate-700/50' : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-transparent shadow-sm'}`}>
         <a href="#" className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white">
           <motion.img 
             src={robotLogo} 

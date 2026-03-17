@@ -35,7 +35,7 @@ export default function HowItWorks() {
               <motion.div
                 animate={{ y: [0, -4, 0] }}
                 transition={{ repeat: Infinity, duration: 3, delay: i * 0.5 }}
-                className={`w-14 h-14 mx-auto mb-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center dark:bg-slate-800/40 dark:border-slate-800${item.color}group-hover:shadow-md transition-shadow`}
+                className={`w-14 h-14 mx-auto mb-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center dark:bg-slate-800/40 dark:border-slate-800 ${item.color} group-hover:shadow-md transition-shadow`}
               >
                 <item.icon size={24} />
               </motion.div>
