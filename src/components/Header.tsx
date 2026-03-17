@@ -74,7 +74,12 @@ export default function Header() {
             {isDark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
-          <a href="#contato" className="hidden sm:inline-flex px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors dark:bg-slate-950">
+          <a 
+            href="https://wa.me/5571992355913?text=Ol%C3%A1%20%F0%9F%A4%96%20Quero%20entender%20como%20um%20agente%20de%20IA%20no%20WhatsApp%20pode%20ajudar%20no%20atendimento%20da%20minha%20empresa.%20Tenho%20interesse%20em%20uma%20solu%C3%A7%C3%A3o%20personalizada%20e%20gostaria%20de%20iniciar%20uma%20an%C3%A1lise%20da%20minha%20necessidade.%20%F0%9F%9A%80" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hidden sm:inline-flex px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors dark:bg-slate-950"
+          >
             Falar com especialista
           </a>
           <button 
