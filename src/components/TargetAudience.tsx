@@ -14,11 +14,11 @@ export default function TargetAudience() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 0.6 }}
-        className="bg-slate-900 rounded-[2rem] p-8 md:p-12 shadow-2xl text-white border border-slate-800"
+        className="bg-slate-900 rounded-[2rem] p-8 md:p-12 shadow-2xl text-white border border-slate-800 dark:bg-slate-950 dark:border-slate-800"
       >
         <div className="text-center max-w-3xl mx-auto mb-12">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">Feito para quem vive de <span className="text-blue-500">tecnologia</span></h2>
-          <p className="text-lg text-slate-400">A Visual AI foi desenhada especificamente para as dores do mercado de reparo e venda de eletrônicos.</p>
+          <p className="text-lg text-slate-400 dark:text-slate-500">A Visual AI foi desenhada especificamente para as dores do mercado de reparo e venda de eletrônicos.</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

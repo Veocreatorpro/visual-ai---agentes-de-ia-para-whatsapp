@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Shield, Lock, Zap } from 'lucide-react';
-import robotLogo from '../assets/images/robot-logo.png';
+import robotLogo from '../assets/images/robot-logo.svg';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16 mt-8">
+    <footer className="bg-slate-900 text-slate-400 py-16 mt-8 dark:bg-slate-950 dark:text-slate-500">
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           <div>
@@ -54,9 +54,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs dark:border-slate-800">
           <span>&copy; {new Date().getFullYear()} Visual AI. Todos os direitos reservados.</span>
-          <span className="text-slate-500">Powered by Azure OpenAI • N8N • Airtable</span>
+          <span className="text-slate-500 dark:text-slate-400">Powered by Azure OpenAI • N8N • Airtable</span>
         </div>
       </div>
     </footer>

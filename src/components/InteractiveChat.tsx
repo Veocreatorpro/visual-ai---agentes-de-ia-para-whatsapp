@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Send, MessageCircle, RotateCw } from 'lucide-react';
-import robotLogo from '../assets/images/robot-logo.png';
+import robotLogo from '../assets/images/robot-logo.svg';
 
 // Use relative URL so Vite proxy handles it in dev
 const API_URL = '';
@@ -80,24 +80,24 @@ export default function InteractiveChat() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-80px" }}
-        className="bg-white dark:bg-slate-800 rounded-[2rem] shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden grid md:grid-cols-2"
+        className="bg-white rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden grid md:grid-cols-2 dark:bg-slate-900 dark:shadow-none dark:border-slate-800"
       >
         {/* Left side — Info */}
-        <div className="p-8 md:p-10 bg-gradient-to-b from-slate-50 dark:from-slate-800 to-white dark:to-slate-800 flex flex-col justify-center gap-6">
+        <div className="p-8 md:p-10 bg-gradient-to-b from-slate-50 to-white flex flex-col justify-center gap-6">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-3">Teste na prática</h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 dark:text-white">Teste na prática</h2>
+            <p className="text-slate-500 text-sm leading-relaxed dark:text-slate-400">
               Interaja com nossa IA configurada para uma assistência técnica. Veja como ela conduz a conversa e prepara o fechamento.
             </p>
           </div>
 
           {/* Security badges */}
-          <div className="bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl p-5 space-y-3">
-            <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider">
+          <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3 dark:bg-slate-900 dark:border-slate-700">
+            <div className="flex items-center gap-2 text-slate-900 font-bold text-xs uppercase tracking-wider dark:text-white">
               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
               Segurança ativa
             </div>
-            <div className="space-y-2.5 text-xs text-slate-600 dark:text-slate-300">
+            <div className="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
               <div className="flex items-center gap-2.5">🛡️ Chaves de API protegidas no servidor</div>
               <div className="flex items-center gap-2.5">🔒 Proteção contra injeção de prompt</div>
               <div className="flex items-center gap-2.5">⚡ Rate limiting (15 req/min)</div>
@@ -117,38 +117,34 @@ export default function InteractiveChat() {
         </div>
         
         {/* Right side — Chat */}
-        <div className="flex flex-col h-[500px] bg-white dark:bg-slate-800 border-l border-slate-100 dark:border-slate-700">
-          <div className="p-3.5 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between bg-white dark:bg-slate-800">
+        <div className="flex flex-col h-[500px] bg-white border-l border-slate-100 dark:bg-slate-900 dark:border-slate-800">
+          <div className="p-3.5 border-b border-slate-100 flex items-center justify-between bg-white dark:border-slate-800 dark:bg-slate-900">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 bg-green-500 text-white rounded-full flex items-center justify-center shadow-md">
                 <MessageCircle size={18} />
               </div>
               <div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-sm">Agente Visual AI</h4>
+                <h4 className="font-bold text-slate-900 text-sm dark:text-white">Agente Visual AI</h4>
                 <span className="text-[10px] text-green-500 font-bold uppercase tracking-wider">Online • Azure GPT-4o</span>
               </div>
             </div>
             <button
               onClick={handleReset}
-              className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-all"
+              className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-all dark:text-slate-500"
               title="Reiniciar conversa"
             >
               <RotateCw size={14} />
             </button>
           </div>
           
-          <div ref={chatContainerRef} className="flex-1 p-3 overflow-y-auto flex flex-col gap-2.5 bg-slate-50/50 dark:bg-slate-900/50 scroll-smooth">
+          <div ref={chatContainerRef} className="flex-1 p-3 overflow-y-auto flex flex-col gap-2.5 bg-slate-50/50 scroll-smooth">
             {messages.map((msg, i) => (
-              <div key={i} className={`max-w-[85%] p-2.5 rounded-2xl text-sm shadow-sm whitespace-pre-line ${
-                msg.role === 'user' 
-                  ? 'bg-white dark:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-tr-sm border border-slate-200 dark:border-slate-600 self-end' 
-                  : 'bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 text-blue-900 dark:text-blue-200 rounded-tl-sm self-start'
-              }`}>
+              <div key={i} className={`max-w-[85%] p-2.5 rounded-2xl text-sm shadow-sm whitespace-pre-line ${ msg.role === 'user' ? 'bg-white text-slate-800 rounded-tr-sm border border-slate-200 self-end' : 'bg-blue-50 border border-blue-100 text-blue-900 rounded-tl-sm self-start' } dark:shadow-none dark:text-slate-100 dark:border-slate-700`}>
                 {msg.text}
               </div>
             ))}
             {isLoading && (
-              <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] self-start shadow-sm flex items-center gap-1">
+              <div className="bg-blue-50 border border-blue-100 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] self-start shadow-sm flex items-center gap-1 dark:shadow-none">
                 <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
                 <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
                 <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
@@ -157,14 +153,14 @@ export default function InteractiveChat() {
             <div ref={messagesEndRef} />
           </div>
           
-          <div className="p-3 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700 flex gap-2">
+          <div className="p-3 bg-white border-t border-slate-100 flex gap-2 dark:bg-slate-900 dark:border-slate-800">
             <input 
               type="text" 
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Digite sua mensagem..." 
-              className="flex-1 px-4 py-2 bg-slate-100 dark:bg-slate-700 border-transparent rounded-full text-sm outline-none focus:bg-white dark:focus:bg-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500"
+              className="flex-1 px-4 py-2 bg-slate-100 border-transparent rounded-full text-sm outline-none focus:bg-white dark:focus:bg-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all text-slate-900 placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 dark:text-white"
               disabled={isLoading}
             />
             <button 

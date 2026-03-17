@@ -16,11 +16,11 @@ export default function HowItWorks() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, margin: "-80px" }}
-        className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-slate-100"
+        className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-slate-100 dark:bg-slate-900 dark:shadow-none dark:border-slate-800"
       >
         <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3">Implementação em 4 passos</h2>
-          <p className="text-slate-500 text-sm">Do primeiro contato ao agente ativo em menos de 7 dias.</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 dark:text-white">Implementação em 4 passos</h2>
+          <p className="text-slate-500 text-sm dark:text-slate-400">Do primeiro contato ao agente ativo em menos de 7 dias.</p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((item, i) => (
@@ -35,13 +35,13 @@ export default function HowItWorks() {
               <motion.div
                 animate={{ y: [0, -4, 0] }}
                 transition={{ repeat: Infinity, duration: 3, delay: i * 0.5 }}
-                className={`w-14 h-14 mx-auto mb-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center ${item.color} group-hover:shadow-md transition-shadow`}
+                className={`w-14 h-14 mx-auto mb-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center dark:bg-slate-800/40 dark:border-slate-800${item.color}group-hover:shadow-md transition-shadow`}
               >
                 <item.icon size={24} />
               </motion.div>
               <div className="text-3xl font-black text-slate-200 mb-1">{item.num}</div>
-              <h3 className="text-base font-bold text-slate-900 mb-1">{item.title}</h3>
-              <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
+              <h3 className="text-base font-bold text-slate-900 mb-1 dark:text-white">{item.title}</h3>
+              <p className="text-slate-500 text-xs leading-relaxed dark:text-slate-400">{item.desc}</p>
             </motion.div>
           ))}
         </div>
