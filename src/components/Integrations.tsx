@@ -62,18 +62,23 @@ export default function Integrations() {
 
         {/* Flow Diagram */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-3 mb-12">
-          {['WhatsApp', 'N8N', 'Azure AI', 'Airtable'].map((name, i) => (
-            <React.Fragment key={name}>
+          {[
+            { name: 'WhatsApp', color: 'bg-green-500' },
+            { name: 'N8N', color: 'bg-orange-500' },
+            { name: 'Azure AI', color: 'bg-blue-500' },
+            { name: 'Airtable', color: 'bg-yellow-500' },
+          ].map((item, i) => (
+            <React.Fragment key={item.name}>
               <motion.div
                 animate={{ y: [0, -4, 0] }}
                 transition={{ repeat: Infinity, duration: 2.5, delay: i * 0.3 }}
-                className={`w-2.5 h-2.5 rounded-full ${i === 0 ? 'bg-green-500' : i === 1 ? 'bg-orange-500' : i === 2 ? 'bg-blue-500' : 'bg-yellow-500'}`}
+                className="bg-white border border-slate-200 rounded-xl px-5 py-2.5 shadow-sm flex items-center gap-2.5 text-sm font-semibold text-slate-700 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300"
               >
-                <div className={`w-2.5 h-2.5 rounded-full ${i === 0 ? 'bg-green-500' : i === 1 ? 'bg-orange-500' : i === 2 ? 'bg-blue-500' : 'bg-yellow-500'}`}></div>
-                {name}
+                <div className={`w-2.5 h-2.5 rounded-full ${item.color} shrink-0`}></div>
+                <span>{item.name}</span>
               </motion.div>
-              {i < 3 && <ArrowRight size={18} className="text-slate-300 hidden md:block" />}
-              {i < 3 && <div className="w-0.5 h-4 bg-slate-200 rounded md:hidden"></div>}
+              {i < 3 && <ArrowRight size={18} className="text-slate-300 dark:text-slate-600 hidden md:block shrink-0" />}
+              {i < 3 && <div className="w-0.5 h-4 bg-slate-200 dark:bg-slate-700 rounded md:hidden"></div>}
             </React.Fragment>
           ))}
         </div>
