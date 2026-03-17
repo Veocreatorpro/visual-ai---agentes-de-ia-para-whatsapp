@@ -4,7 +4,7 @@ import { Send, MessageCircle, RotateCw } from 'lucide-react';
 import robotLogo from '../assets/images/robot-logo.svg';
 
 // Use relative URL so Vite proxy handles it in dev
-const API_URL = import.meta.env.DEV ? '' : 'https://visualai-whatsapp-api-1.azurewebsites.net';
+const API_URL = '';
 
 export default function InteractiveChat() {
   const [messages, setMessages] = useState<{role: 'user' | 'agent', text: string}[]>([
