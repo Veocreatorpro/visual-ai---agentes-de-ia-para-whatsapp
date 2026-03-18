@@ -13,7 +13,23 @@ import InteractiveChat from './components/InteractiveChat';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 
+import AdminDashboard from './components/AdminDashboard';
+
 export default function App() {
+  const [isAdmin, setIsAdmin] = React.useState(window.location.hash === '#admin-master');
+
+  React.useEffect(() => {
+    const handleHashChange = () => {
+      setIsAdmin(window.location.hash === '#admin-master');
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  if (isAdmin) {
+    return <AdminDashboard />;
+  }
+
   return (
     <div className="min-h-screen font-sans text-slate-900 bg-[#fafafa] dark:bg-slate-950 dark:text-white transition-colors duration-500">
       <Header />
@@ -34,3 +50,4 @@ export default function App() {
     </div>
   );
 }
+

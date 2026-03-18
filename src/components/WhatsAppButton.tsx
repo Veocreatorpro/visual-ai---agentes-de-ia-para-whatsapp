@@ -178,7 +178,20 @@ export default function WhatsAppButton() {
             : '0 20px 40px -10px rgba(37, 211, 102, 0.5)'
         }}
         whileHover={{ scale: 1.05, y: -2 }}
+        onClick={async () => {
+          try {
+            const API_URL = window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1')
+              ? 'http://localhost:3001'
+              : 'https://visualai-whatsapp-api-1.azurewebsites.net';
+            fetch(`${API_URL}/api/analytics/track`, { 
+              method: 'POST', 
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ type: 'whatsapp_click' }) 
+            });
+          } catch (e) {}
+        }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
+
       >
         <motion.span
           className="relative"
