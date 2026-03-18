@@ -6,6 +6,7 @@ import {defineConfig, loadEnv} from 'vite';
 export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   return {
+    base: '/visual-ai---agentes-de-ia-para-whatsapp/',
     plugins: [react(), tailwindcss()],
     define: {
       // ✅ Only safe, public variables are exposed to the frontend
