@@ -4,30 +4,40 @@ import { Clock, Users, Layers } from 'lucide-react';
 
 export default function PainPoints() {
   return (
-    <section className="py-8 max-w-6xl mx-auto px-4">
+    <section className="py-20 max-w-6xl mx-auto px-4">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="bg-slate-900 rounded-[2rem] p-8 md:p-12 shadow-xl text-white dark:bg-slate-950 dark:shadow-none"
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="bg-slate-900 rounded-[3rem] p-10 md:p-16 monster-shadow text-white dark:bg-slate-950 relative overflow-hidden"
       >
-        <div className="max-w-2xl mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">O gargalo do WhatsApp</h2>
-          <p className="text-slate-400 text-sm dark:text-slate-500">Sua equipe técnica perde horas respondendo perguntas repetitivas em vez de focar no que importa: consertar aparelhos e fechar vendas.</p>
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
+        
+        <div className="max-w-2xl mb-14 relative z-10">
+          <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight">O Gargalo Final do <span className="text-indigo-400">WhatsApp</span></h2>
+          <p className="text-slate-400 text-lg leading-relaxed">
+            Sua equipe técnica perde horas com perguntas repetitivas. É hora de automatizar a triagem e focar no que traz lucro.
+          </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-3 gap-6 relative z-10">
           {[
-            { icon: Clock, title: "Demora na resposta", desc: "Leads esfriam enquanto esperam o orçamento." },
-            { icon: Users, title: "Equipe sobrecarregada", desc: "Técnicos parando o serviço para responder mensagens." },
-            { icon: Layers, title: "Triagem confusa", desc: "Mistura de quem quer comprar, orçar ou pedir garantia." }
+            { icon: Clock, title: "Demora Fatal", desc: "Leads esfriam enquanto esperam o orçamento." },
+            { icon: Users, title: "Caos Operacional", desc: "Técnicos parando o serviço para responder dúvidas." },
+            { icon: Layers, title: "Triagem Falha", desc: "Perda de tempo com curiosos e pedidos de garantia." }
           ].map((item, i) => (
-            <div key={i} className="bg-slate-800/50 border border-slate-700/50 p-6 rounded-2xl">
-              <item.icon size={24} className="text-blue-400 mb-4" />
-              <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-              <p className="text-slate-400 text-sm dark:text-slate-500">{item.desc}</p>
-            </div>
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -5 }}
+              className="bg-white/5 border border-white/10 p-8 rounded-[2rem] glass"
+            >
+              <div className="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6">
+                <item.icon size={26} />
+              </div>
+              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+            </motion.div>
           ))}
         </div>
       </motion.div>

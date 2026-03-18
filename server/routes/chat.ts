@@ -64,7 +64,7 @@ chatRouter.post('/message', validateChatRequest, async (req: Request, res: Respo
     session.messages.push({ role: 'user', content: cleanMessage });
     session.lastActivity = Date.now();
 
-    // Cap conversation history to prevent token overflow
+    // Cap conversation history
     if (session.messages.length > 20) {
       const systemMsg = session.messages[0];
       session.messages = [systemMsg, ...session.messages.slice(-10)];

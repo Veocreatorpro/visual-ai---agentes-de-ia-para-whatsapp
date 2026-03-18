@@ -167,26 +167,28 @@ export default function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 bg-green-500 text-white font-bold text-sm rounded-full transition-all group"
+        className="fixed bottom-10 right-10 z-50 flex items-center gap-3 px-8 py-4 bg-[#25D366] text-white font-black text-[15px] rounded-full transition-all group shadow-[0_20px_40px_-10px_rgba(37,211,102,0.5)] border border-white/20"
         initial={{ opacity: 0, scale: 0.8, y: 20 }}
         animate={{ 
           opacity: 1, 
-          scale: isPressing ? 0.88 : 1, 
-          y: isPressing ? 2 : 0,
+          scale: isPressing ? 0.9 : 1, 
+          y: isPressing ? 4 : 0,
           boxShadow: isPressing 
-            ? '0 0 30px rgba(34, 197, 94, 0.9), 0 0 60px rgba(34, 197, 94, 0.3)' 
-            : '0 8px 25px -5px rgba(34, 197, 94, 0.4)'
+            ? '0 0 40px rgba(37, 211, 102, 0.8), 0 0 80px rgba(37, 211, 102, 0.4)' 
+            : '0 20px 40px -10px rgba(37, 211, 102, 0.5)'
         }}
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.15, ease: 'easeOut' }}
+        whileHover={{ scale: 1.05, y: -2 }}
+        transition={{ duration: 0.2, ease: 'easeOut' }}
       >
         <motion.span
-          animate={{ scale: [1, 1.15, 1] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="relative"
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
         >
-          <MessageCircle size={20} />
+          <div className="absolute inset-0 bg-white/40 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
+          <MessageCircle size={24} className="relative z-10" />
         </motion.span>
-        <span className="hidden sm:inline">Falar no WhatsApp</span>
+        <span className="hidden sm:inline tracking-tight">Falar com Consultor</span>
       </motion.a>
     </>
   );

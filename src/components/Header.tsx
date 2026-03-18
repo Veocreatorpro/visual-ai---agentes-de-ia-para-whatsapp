@@ -39,24 +39,27 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-4 w-full z-50 flex justify-center px-4">
-      <div className={`transition-all duration-300 rounded-full px-5 py-2.5 flex justify-between items-center w-full max-w-5xl ${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg border border-slate-200/50 dark:border-slate-700/50' : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-transparent shadow-sm'}`}>
-        <a href="#" className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white">
-          <motion.img 
-            src={robotLogo} 
-            alt="Visual AI" 
-            className="w-8 h-8"
-            animate={{ y: [0, -3, 0] }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          />
-          <span className="text-xl md:text-2xl font-black tracking-tight">Visual AI</span>
+    <header className="fixed top-6 w-full z-50 flex justify-center px-4">
+      <div className={`transition-all duration-500 rounded-3xl px-6 py-3 flex justify-between items-center w-full max-w-5xl glass ${isScrolled ? 'monster-shadow bg-white/70 dark:bg-slate-900/40' : 'bg-white/40 dark:bg-slate-900/20 border-transparent'}`}>
+        <a href="#" className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white group">
+          <div className="relative">
+            <div className="absolute inset-0 bg-indigo-500/20 blur-lg rounded-full group-hover:bg-indigo-500/40 transition-all"></div>
+            <motion.img 
+              src={robotLogo} 
+              alt="Visual AI" 
+              className="w-9 h-9 relative z-10"
+              animate={{ y: [0, -4, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            />
+          </div>
+          <span className="text-xl md:text-2xl font-black tracking-tighter gradient-text">Visual AI</span>
         </a>
         
         <nav className="hidden lg:block">
-          <ul className="flex gap-5 text-sm">
+          <ul className="flex gap-8 text-[13px]">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="text-slate-600 font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors dark:text-slate-400">
+                <a href={link.href} className="text-slate-600 font-bold uppercase tracking-widest hover:text-indigo-600 dark:hover:text-indigo-400 transition-all dark:text-slate-400">
                   {link.label}
                 </a>
               </li>
@@ -64,24 +67,25 @@ export default function Header() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
-          {/* Dark mode toggle — discrete */}
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setIsDark(!isDark)}
-            className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 dark:text-slate-500"
+            className="p-2.5 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all rounded-xl hover:bg-white dark:hover:bg-slate-800"
             aria-label="Alternar tema"
           >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <a 
-            href="https://wa.me/5571992355913?text=Ol%C3%A1%20%F0%9F%A4%96%20Quero%20entender%20como%20um%20agente%20de%20IA%20no%20WhatsApp%20pode%20ajudar%20no%20atendimento%20da%20minha%20empresa.%20Tenho%20interesse%20em%20uma%20solu%C3%A7%C3%A3o%20personalizada%20e%20gostaria%20de%20iniciar%20uma%20an%C3%A1lise%20da%20minha%20necessidade.%20%F0%9F%9A%80" 
+          <motion.a 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="https://wa.me/5571992355913" 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="hidden sm:inline-flex px-4 py-2 bg-slate-900 text-white text-sm font-semibold rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-700 transition-colors dark:bg-slate-950"
+            className="hidden sm:inline-flex px-6 py-2.5 gradient-bg text-white text-xs font-bold uppercase tracking-widest rounded-xl shadow-lg shadow-indigo-200 dark:shadow-none transition-all"
           >
-            Falar com especialista
-          </a>
+            Especialista
+          </motion.a>
           <button 
             className="lg:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors dark:text-slate-400"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

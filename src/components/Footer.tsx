@@ -5,58 +5,64 @@ import robotLogo from '../assets/images/robot-logo.svg';
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400 py-16 mt-8 dark:bg-slate-950 dark:text-slate-500">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-12 mb-12">
-          <div>
-            <div className="flex items-center gap-2.5 text-xl font-bold text-white mb-4">
-              <motion.img 
-                src={robotLogo} 
-                alt="Visual AI" 
-                className="w-9 h-9 rounded-full"
-                animate={{ y: [0, -3, 0] }}
-                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              />
-              Visual AI
+    <footer className="bg-slate-950 text-slate-400 py-20 mt-12 relative overflow-hidden">
+      {/* Decorative background glow */}
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-indigo-600/5 rounded-full blur-[120px]"></div>
+      
+      <div className="max-w-6xl mx-auto px-4 relative z-10">
+        <div className="grid md:grid-cols-3 gap-16 mb-16">
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 text-2xl font-black text-white">
+              <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
+                <img src={robotLogo} alt="" className="w-7 h-7" />
+              </div>
+              <span className="gradient-text">Visual AI</span>
             </div>
-            <p className="text-sm leading-relaxed">
-              Automação inteligente e autêntica para assistências técnicas. Agentes de IA que transformam o atendimento do seu WhatsApp.
+            <p className="text-[15px] leading-relaxed text-slate-400">
+              Automação inteligente para assistências técnicas. <br />
+              <span className="text-slate-300 font-medium">O futuro do atendimento é Visual.</span>
             </p>
           </div>
 
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Navegação</h3>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#inicio" className="hover:text-blue-400 transition-colors">Início</a></li>
-              <li><a href="#solucao" className="hover:text-blue-400 transition-colors">Solução</a></li>
-              <li><a href="#integracoes" className="hover:text-blue-400 transition-colors">Integrações</a></li>
-              <li><a href="#como-funciona" className="hover:text-blue-400 transition-colors">Como funciona</a></li>
-              <li><a href="#contato" className="hover:text-blue-400 transition-colors">Demonstração</a></li>
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Navegação</h3>
+            <ul className="space-y-4 text-[14px]">
+              <li><a href="#inicio" className="hover:text-indigo-400 transition-all hover:translate-x-1 inline-block">Início</a></li>
+              <li><a href="#solucao" className="hover:text-indigo-400 transition-all hover:translate-x-1 inline-block">Solução</a></li>
+              <li><a href="#integracoes" className="hover:text-indigo-400 transition-all hover:translate-x-1 inline-block">Integrações</a></li>
+              <li><a href="#como-funciona" className="hover:text-indigo-400 transition-all hover:translate-x-1 inline-block">Como funciona</a></li>
+              <li><a href="#contato" className="hover:text-indigo-400 transition-all hover:translate-x-1 inline-block">Demonstração</a></li>
             </ul>
           </div>
 
-          <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Segurança</h3>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-center gap-2">
-                <Shield size={14} className="text-green-400" /> 
-                Dados protegidos via Azure
+          <div className="space-y-8">
+            <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em]">Tecnologia & Segurança</h3>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 glass">
+                <Shield size={20} className="text-indigo-400" /> 
+                <div className="text-xs">
+                  <div className="text-white font-bold mb-0.5">Azure Cloud</div>
+                  <div className="text-slate-500">Infraestrutura robusta</div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Lock size={14} className="text-green-400" /> 
-                Criptografia end-to-end
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap size={14} className="text-green-400" /> 
-                LGPD Compliance
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 glass">
+                <Lock size={20} className="text-indigo-400" /> 
+                <div className="text-xs">
+                  <div className="text-white font-bold mb-0.5">GPT-4o</div>
+                  <div className="text-slate-500">IA de última geração</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs dark:border-slate-800">
-          <span>&copy; {new Date().getFullYear()} Visual AI. Todos os direitos reservados.</span>
-          <span className="text-slate-500 dark:text-slate-400">Powered by Azure OpenAI • N8N • Airtable</span>
+        <div className="pt-10 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-slate-600">
+          <span>&copy; {new Date().getFullYear()} Visual AI • Todos os direitos reservados</span>
+          <div className="flex gap-4 items-center">
+            <span className="text-indigo-500/50">AZURE</span>
+            <span className="text-indigo-500/50">N8N</span>
+            <span className="text-indigo-500/50">AIRTABLE</span>
+          </div>
         </div>
       </div>
     </footer>

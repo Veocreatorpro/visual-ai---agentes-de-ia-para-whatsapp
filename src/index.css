@@ -5,37 +5,72 @@
 @layer base {
   :root {
     --bg-primary: #ffffff;
-    --bg-secondary: #f8fafc;
+    --bg-secondary: #fdfdff;
     --text-primary: #0f172a;
+    --brand-primary: #4f46e5;
+    --brand-secondary: #0ea5e9;
+    --accent: #f43f5e;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
   }
 
   .dark {
-    --bg-primary: #0f172a;
-    --bg-secondary: #020617;
+    --bg-primary: #020617;
+    --bg-secondary: #0a0f1e;
     --text-primary: #f8fafc;
+    --brand-primary: #6366f1;
+    --brand-secondary: #38bdf8;
+    --accent: #fb7185;
+    --glass-bg: rgba(15, 23, 42, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
     color-scheme: dark;
   }
 }
 
+@layer utilities {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  }
+
+  .monster-shadow {
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark .monster-shadow {
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+}
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Outfit', 'Inter', sans-serif;
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Scrollbar */
+/* Scrollbar optimization */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 999px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: linear-gradient(to bottom, var(--brand-primary), var(--brand-secondary));
+  border-radius: 10px;
 }

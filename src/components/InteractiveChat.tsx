@@ -77,101 +77,143 @@ export default function InteractiveChat() {
   };
 
   return (
-    <section id="contato" className="py-12 max-w-6xl mx-auto px-4">
+    <section id="contato" className="py-20 max-w-6xl mx-auto px-4">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-80px" }}
-        className="bg-white rounded-[2rem] shadow-xl border border-slate-100 overflow-hidden grid md:grid-cols-2 dark:bg-slate-900 dark:shadow-none dark:border-slate-800"
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden grid md:grid-cols-2 dark:bg-slate-900/40 dark:border-slate-800/50 glass"
       >
         {/* Left side — Info */}
-        <div className="p-8 md:p-10 bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 flex flex-col justify-center gap-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 dark:text-white">Teste na prática</h2>
-            <p className="text-slate-500 text-sm leading-relaxed dark:text-slate-400">
-              Interaja com nossa IA configurada para uma assistência técnica. Veja como ela conduz a conversa e prepara o fechamento.
+        <div className="p-10 md:p-12 bg-gradient-to-br from-indigo-50/50 to-white dark:from-indigo-950/10 dark:to-slate-900 flex flex-col justify-center gap-8 relative overflow-hidden">
+          {/* Decorative glow */}
+          <div className="absolute top-0 left-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl"></div>
+          
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 dark:text-white leading-tight">
+              Experimente a <br /><span className="gradient-text">Potência da IA</span>
+            </h2>
+            <p className="text-slate-500 text-base leading-relaxed dark:text-slate-400">
+              Interaja com nosso agente configurado para assistências técnicas. Veja como ele tria problemas e prepara orçamentos automaticamente.
             </p>
           </div>
 
           {/* Security badges */}
-          <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-3 dark:bg-slate-900 dark:border-slate-700">
-            <div className="flex items-center gap-2 text-slate-900 font-bold text-xs uppercase tracking-wider dark:text-white">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-              Segurança ativa
+          <div className="glass bg-white/50 border border-indigo-100/50 rounded-2xl p-6 space-y-4 dark:bg-slate-800/20 dark:border-indigo-900/20 relative z-10">
+            <div className="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-widest dark:text-indigo-400">
+              <span className="w-2.5 h-2.5 bg-indigo-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(79,70,229,0.5)]"></span>
+              Infraestrutura Enterprise
             </div>
-            <div className="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-2.5">🛡️ Chaves de API protegidas no servidor</div>
-              <div className="flex items-center gap-2.5">🔒 Proteção contra injeção de prompt</div>
-              <div className="flex items-center gap-2.5">⚡ Rate limiting (15 req/min)</div>
-              <div className="flex items-center gap-2.5">🌐 CORS + Helmet security headers</div>
-              <div className="flex items-center gap-2.5">🤖 Azure OpenAI (GPT-4o)</div>
+            <div className="space-y-3 text-[13px] text-slate-600 dark:text-slate-400">
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-full text-[10px]">🛡️</div>
+                <span>Chaves de API isoladas no servidor</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-full text-[10px]">🔒</div>
+                <span>Proteção avançada de Prompt</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-full text-[10px]">⚡</div>
+                <span>Processamento em tempo real</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 flex items-center justify-center bg-indigo-100 dark:bg-indigo-900/40 rounded-full text-[10px]">🤖</div>
+                <span>Powered by Azure OpenAI GPT-4o</span>
+              </div>
             </div>
           </div>
 
           {/* Floating robot */}
           <motion.div 
-            className="hidden md:flex justify-center"
-            animate={{ y: [0, -8, 0] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            className="hidden md:flex justify-center pt-4"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
           >
-            <img src={robotLogo} alt="Visual AI Bot" className="w-20 h-20 opacity-60" />
+            <div className="relative">
+              <div className="absolute inset-0 bg-indigo-500/20 blur-2xl rounded-full"></div>
+              <img src={robotLogo} alt="Visual AI Bot" className="w-24 h-24 opacity-80 relative z-10" />
+            </div>
           </motion.div>
         </div>
         
         {/* Right side — Chat */}
-        <div className="flex flex-col h-[500px] bg-white border-l border-slate-100 dark:bg-slate-900 dark:border-slate-800">
-          <div className="p-3.5 border-b border-slate-100 flex items-center justify-between bg-white dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 bg-green-500 text-white rounded-full flex items-center justify-center shadow-md">
-                <MessageCircle size={18} />
+        <div className="flex flex-col h-[600px] bg-white dark:bg-slate-900/60 relative overflow-hidden">
+          {/* Chat Header */}
+          <div className="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-20">
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 gradient-bg text-white rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none transform -rotate-2">
+                <MessageCircle size={22} />
               </div>
               <div>
-                <h4 className="font-bold text-slate-900 text-sm dark:text-white">Agente Visual AI</h4>
-                <span className="text-[10px] text-green-500 font-bold uppercase tracking-wider">Online • Azure GPT-4o</span>
+                <h4 className="font-bold text-slate-900 text-sm dark:text-white tracking-tight">Agente Visual AI</h4>
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  <span className="text-[10px] text-green-600 dark:text-green-400 font-bold uppercase tracking-widest">Disponível Agora</span>
+                </div>
               </div>
             </div>
             <button
               onClick={handleReset}
-              className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-all dark:text-slate-500"
-              title="Reiniciar conversa"
+              className="p-2.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-xl transition-all"
+              title="Reiniciar Simulação"
             >
-              <RotateCw size={14} />
+              <RotateCw size={16} />
             </button>
           </div>
           
-          <div ref={chatContainerRef} className="flex-1 p-3 overflow-y-auto flex flex-col gap-2.5 bg-slate-50/50 dark:bg-slate-800/50 scroll-smooth">
+          {/* Messages Area */}
+          <div ref={chatContainerRef} className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-slate-50/30 dark:bg-slate-950/20 scroll-smooth">
             {messages.map((msg, i) => (
-              <div key={i} className={`max-w-[85%] p-2.5 rounded-2xl text-sm shadow-sm whitespace-pre-line ${ msg.role === 'user' ? 'bg-white text-slate-800 rounded-tr-sm border border-slate-200 self-end dark:bg-slate-700 dark:text-white dark:border-slate-600' : 'bg-blue-50 border border-blue-100 text-blue-900 rounded-tl-sm self-start dark:bg-blue-900/30 dark:border-blue-800 dark:text-blue-100' } dark:shadow-none`}>
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                className={`max-w-[85%] p-4 rounded-[1.5rem] text-[14px] leading-relaxed shadow-sm whitespace-pre-line ${ 
+                  msg.role === 'user' 
+                    ? 'bg-white text-slate-800 rounded-tr-none border border-slate-200 self-end dark:bg-slate-800 dark:text-white dark:border-slate-700' 
+                    : 'gradient-bg text-white rounded-tl-none self-start shadow-indigo-200 dark:shadow-none' 
+                }`}
+              >
                 {msg.text}
-              </div>
+              </motion.div>
             ))}
             {isLoading && (
-              <div className="bg-blue-50 border border-blue-100 p-2.5 rounded-2xl rounded-tl-sm max-w-[85%] self-start shadow-sm flex items-center gap-1 dark:shadow-none dark:bg-blue-900/30 dark:border-blue-800">
-                <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
-                <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
-                <motion.div animate={{ scale: [0, 1, 0] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
-              </div>
+              <motion.div 
+                initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }}
+                className="bg-indigo-50 border border-indigo-100 p-4 rounded-3xl rounded-tl-none max-w-[85%] self-start shadow-sm flex items-center gap-1.5 dark:bg-indigo-900/30 dark:border-indigo-800"
+              >
+                <div className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-widest mr-2">Agente pensando</div>
+                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+              </motion.div>
             )}
             <div ref={messagesEndRef} />
           </div>
           
-          <div className="p-3 bg-white border-t border-slate-100 flex gap-2 dark:bg-slate-900 dark:border-slate-800">
-            <input 
-              type="text" 
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Digite sua mensagem..." 
-              className="flex-1 px-4 py-2 bg-slate-100 border-transparent rounded-full text-sm outline-none focus:bg-white dark:focus:bg-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition-all text-slate-900 placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 dark:text-white"
-              disabled={isLoading}
-            />
-            <button 
-              onClick={handleSend}
-              disabled={isLoading || !input.trim()}
-              className="w-9 h-9 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 disabled:opacity-50 transition-colors shrink-0"
-            >
-              <Send size={14} className="ml-0.5" />
-            </button>
+          {/* Input Area */}
+          <div className="p-5 bg-white border-t border-slate-100 flex gap-3 dark:bg-slate-900 dark:border-slate-800 sticky bottom-0">
+            <div className="flex-1 relative">
+              <input 
+                type="text" 
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                placeholder="Pergunte sobre um conserto..." 
+                className="w-full pl-5 pr-12 py-3.5 bg-slate-100 border-none rounded-2xl text-[14px] outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500 transition-all font-medium"
+                disabled={isLoading}
+              />
+              <button 
+                onClick={handleSend}
+                disabled={isLoading || !input.trim()}
+                className="absolute right-2 top-1.5 w-10 h-10 gradient-bg text-white rounded-xl flex items-center justify-center hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-95"
+              >
+                <Send size={16} />
+              </button>
+            </div>
           </div>
         </div>
       </motion.div>

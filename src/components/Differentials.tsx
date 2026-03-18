@@ -4,46 +4,42 @@ import { BrainCircuit, GitMerge, Zap, ShieldCheck } from 'lucide-react';
 
 export default function Differentials() {
   return (
-    <section className="py-8 max-w-7xl mx-auto px-4">
+    <section className="py-20 max-w-7xl mx-auto px-4">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="bg-slate-900 rounded-[2rem] p-8 md:p-12 shadow-2xl text-white border border-slate-800 dark:bg-slate-950 dark:border-slate-800"
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="bg-slate-900 rounded-[3rem] p-10 md:p-20 monster-shadow text-white border border-white/5 dark:bg-slate-950 relative overflow-hidden"
       >
-        <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 text-blue-400 rounded-full text-xs font-bold tracking-wide uppercase mb-4 border border-blue-500/20">
-            <BrainCircuit size={14} /> Diferenciais
+        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+        
+        <div className="max-w-3xl mb-16 relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 text-indigo-400 rounded-full text-[11px] font-bold uppercase tracking-widest mb-6 border border-indigo-500/20">
+            <BrainCircuit size={14} /> O Diferencial Visual
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">Não é um robô de botões.<br/><span className="text-blue-500">É IA de verdade.</span></h2>
-          <p className="text-slate-400 text-lg dark:text-slate-500">Esqueça aqueles menus irritantes de "Digite 1 para X, 2 para Y". Nossa IA conversa naturalmente, entende áudios, gírias e o contexto do problema do cliente.</p>
+          <h2 className="text-3xl md:text-5xl font-black mb-8 leading-tight tracking-tight">Não é um Robô de Botões.<br/><span className="text-indigo-500">É Inteligência Pura.</span></h2>
+          <p className="text-slate-400 text-lg leading-relaxed font-medium">Esqueça menus irritantes. Nossa IA entende áudios, gírias e resolve problemas complexos na hora.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-slate-800/50 border border-slate-700/50 p-8 rounded-3xl flex flex-col h-full">
-            <div className="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-2xl flex items-center justify-center mb-6">
-              <GitMerge size={24} />
-            </div>
-            <h3 className="text-xl font-bold mb-3">Fluxo Dinâmico</h3>
-            <p className="text-slate-400 text-sm leading-relaxed dark:text-slate-500">A IA não segue um roteiro fixo. Se o cliente mudar de assunto ou fizer duas perguntas ao mesmo tempo, ela adapta a resposta sem quebrar a conversa.</p>
-          </div>
-
-          <div className="bg-slate-800/50 border border-slate-700/50 p-8 rounded-3xl flex flex-col h-full">
-            <div className="w-12 h-12 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-6">
-              <Zap size={24} />
-            </div>
-            <h3 className="text-xl font-bold mb-3">Respostas em Segundos</h3>
-            <p className="text-slate-400 text-sm leading-relaxed dark:text-slate-500">Conectada ao seu catálogo de peças e serviços, a IA consulta preços e disponibilidade instantaneamente, entregando orçamentos na hora.</p>
-          </div>
-
-          <div className="bg-slate-800/50 border border-slate-700/50 p-8 rounded-3xl flex flex-col h-full">
-            <div className="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-2xl flex items-center justify-center mb-6">
-              <ShieldCheck size={24} />
-            </div>
-            <h3 className="text-xl font-bold mb-3">Filtro de Curiosos</h3>
-            <p className="text-slate-400 text-sm leading-relaxed dark:text-slate-500">A IA qualifica o lead. Ela só aciona um técnico humano quando o cliente já forneceu o modelo do aparelho, o defeito e demonstrou real intenção de conserto.</p>
-          </div>
+        <div className="grid md:grid-cols-3 gap-8 relative z-10">
+          {[
+            { icon: GitMerge, title: "Fluxo Dinâmico", desc: "A IA adapta a conversa em tempo real, sem quebras.", color: "text-indigo-400" },
+            { icon: Zap, title: "Velocidade Brutal", desc: "Consultas instantâneas ao seu catálogo de peças.", color: "text-amber-400" },
+            { icon: ShieldCheck, title: "Filtro de Elite", desc: "Qualificação automática: só atenda leads quentes.", color: "text-emerald-400" }
+          ].map((item, i) => (
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -5 }}
+              className="bg-white/5 border border-white/10 p-10 rounded-[2.5rem] glass"
+            >
+              <div className={`w-14 h-14 bg-white/5 ${item.color} rounded-2xl flex items-center justify-center mb-8 border border-white/10 shadow-lg`}>
+                <item.icon size={28} />
+              </div>
+              <h3 className="text-2xl font-black mb-4 tracking-tight">{item.title}</h3>
+              <p className="text-slate-400 text-[15px] leading-relaxed font-medium">{item.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
     </section>

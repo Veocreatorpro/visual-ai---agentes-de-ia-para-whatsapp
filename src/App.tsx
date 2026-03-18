@@ -15,9 +15,9 @@ import WhatsAppButton from './components/WhatsAppButton';
 
 export default function App() {
   return (
-    <div className="min-h-screen font-sans text-slate-900 pb-8">
+    <div className="min-h-screen font-sans text-slate-900 bg-[#fafafa] dark:bg-slate-950 dark:text-white transition-colors duration-500">
       <Header />
-      <main className="flex flex-col gap-2">
+      <main className="flex flex-col gap-0">
         <Hero />
         <PainPoints />
         <Solution />
