@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import robotLogo from '../assets/images/robot-logo.svg';
 
 export default function Header() {
+  const [scrollDir, setScrollDir] = useState<'up' | 'down'>('up');
+  const [lastY, setLastY] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => {
@@ -15,10 +17,17 @@ export default function Header() {
   });
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setIsScrolled(currentY > 20);
+      if (currentY < 40) { setScrollDir('up'); }
+      else if (currentY < lastY) { setScrollDir('up'); }
+      else if (currentY > lastY + 5) { setScrollDir('down'); }
+      setLastY(currentY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastY]);
 
   useEffect(() => {
     if (isDark) {
@@ -39,8 +48,12 @@ export default function Header() {
   ];
 
   return (
-    <header className="fixed top-6 w-full z-50 flex justify-center px-4">
-      <div className={`transition-all duration-500 rounded-3xl px-6 py-3 flex justify-between items-center w-full max-w-5xl glass ${isScrolled ? 'monster-shadow bg-white/70 dark:bg-slate-900/40' : 'bg-white/40 dark:bg-slate-900/20 border-transparent'}`}>
+    <motion.header
+      className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4"
+      animate={{ y: scrollDir === 'down' ? -100 : 0, opacity: scrollDir === 'down' ? 0 : 1 }}
+      transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      <div className={`transition-all duration-500 rounded-3xl px-6 py-3 flex justify-between items-center w-full max-w-5xl glass ${isScrolled ? 'monster-shadow bg-white/80 dark:bg-slate-900/60' : 'bg-white/40 dark:bg-slate-900/20 border-transparent'}`}>
         <a href="#" className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white group">
           <div className="relative">
             <div className="absolute inset-0 bg-indigo-500/20 blur-lg rounded-full group-hover:bg-indigo-500/40 transition-all"></div>
@@ -103,7 +116,7 @@ export default function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-20 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 p-6 lg:hidden z-50 dark:border-slate-700"
+            className="fixed top-20 left-4 right-4 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-200 p-6 lg:hidden z-50 dark:border-slate-700 dark:bg-slate-900/95"
           >
             <ul className="flex flex-col gap-4">
               {navLinks.map((link) => (
@@ -121,6 +134,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

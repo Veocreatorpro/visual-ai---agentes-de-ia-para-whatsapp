@@ -2,6 +2,12 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Clock, Users, Layers } from 'lucide-react';
 
+const items = [
+  { icon: Clock, title: "Demora Fatal", desc: "Leads esfriam enquanto esperam o orçamento.", gradient: "from-blue-600 to-indigo-600" },
+  { icon: Users, title: "Caos Operacional", desc: "Técnicos parando o serviço para responder dúvidas.", gradient: "from-violet-600 to-purple-600" },
+  { icon: Layers, title: "Triagem Falha", desc: "Perda de tempo com curiosos e pedidos de garantia.", gradient: "from-indigo-500 to-blue-700" },
+];
+
 export default function PainPoints() {
   return (
     <section className="py-20 max-w-6xl mx-auto px-4">
@@ -22,21 +28,18 @@ export default function PainPoints() {
         </div>
         
         <div className="grid md:grid-cols-3 gap-6 relative z-10">
-          {[
-            { icon: Clock, title: "Demora Fatal", desc: "Leads esfriam enquanto esperam o orçamento." },
-            { icon: Users, title: "Caos Operacional", desc: "Técnicos parando o serviço para responder dúvidas." },
-            { icon: Layers, title: "Triagem Falha", desc: "Perda de tempo com curiosos e pedidos de garantia." }
-          ].map((item, i) => (
+          {items.map((item, i) => (
             <motion.div 
               key={i} 
-              whileHover={{ y: -5 }}
-              className="bg-white/5 border border-white/10 p-8 rounded-[2rem] glass"
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="bg-white rounded-[2rem] p-8 shadow-xl"
             >
-              <div className="w-12 h-12 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6">
-                <item.icon size={26} />
+              <div className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}>
+                <item.icon size={22} className="text-white" />
               </div>
-              <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className={`text-xl font-black mb-3 bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>{item.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>

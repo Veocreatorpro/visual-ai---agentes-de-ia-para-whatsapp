@@ -2,6 +2,12 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { BrainCircuit, GitMerge, Zap, ShieldCheck } from 'lucide-react';
 
+const features = [
+  { icon: GitMerge, title: "Fluxo Dinâmico", desc: "A IA adapta a conversa em tempo real, sem quebras.", gradient: "from-blue-600 to-indigo-600" },
+  { icon: Zap, title: "Velocidade Brutal", desc: "Consultas instantâneas ao seu catálogo de peças.", gradient: "from-amber-500 to-orange-600" },
+  { icon: ShieldCheck, title: "Filtro de Elite", desc: "Qualificação automática: só atende leads quentes.", gradient: "from-emerald-500 to-teal-600" },
+];
+
 export default function Differentials() {
   return (
     <section className="py-20 max-w-7xl mx-auto px-4">
@@ -18,26 +24,23 @@ export default function Differentials() {
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 text-indigo-400 rounded-full text-[11px] font-bold uppercase tracking-widest mb-6 border border-indigo-500/20">
             <BrainCircuit size={14} /> O Diferencial Visual
           </div>
-          <h2 className="text-3xl md:text-5xl font-black mb-8 leading-tight tracking-tight">Não é um Robô de Botões.<br/><span className="text-indigo-500">É Inteligência Pura.</span></h2>
+          <h2 className="text-3xl md:text-5xl font-black mb-8 leading-tight tracking-tight">Não é um Robô de Botões.<br/><span className="text-indigo-400">É Inteligência Pura.</span></h2>
           <p className="text-slate-400 text-lg leading-relaxed font-medium">Esqueça menus irritantes. Nossa IA entende áudios, gírias e resolve problemas complexos na hora.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 relative z-10">
-          {[
-            { icon: GitMerge, title: "Fluxo Dinâmico", desc: "A IA adapta a conversa em tempo real, sem quebras.", color: "text-indigo-400" },
-            { icon: Zap, title: "Velocidade Brutal", desc: "Consultas instantâneas ao seu catálogo de peças.", color: "text-amber-400" },
-            { icon: ShieldCheck, title: "Filtro de Elite", desc: "Qualificação automática: só atenda leads quentes.", color: "text-emerald-400" }
-          ].map((item, i) => (
+          {features.map((item, i) => (
             <motion.div 
               key={i} 
-              whileHover={{ y: -5 }}
-              className="bg-white/5 border border-white/10 p-10 rounded-[2.5rem] glass"
+              whileHover={{ y: -6, scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              className="bg-white rounded-[2.5rem] p-10 shadow-xl"
             >
-              <div className={`w-14 h-14 bg-white/5 ${item.color} rounded-2xl flex items-center justify-center mb-8 border border-white/10 shadow-lg`}>
-                <item.icon size={28} />
+              <div className={`w-14 h-14 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-8 shadow-lg`}>
+                <item.icon size={26} className="text-white" />
               </div>
-              <h3 className="text-2xl font-black mb-4 tracking-tight">{item.title}</h3>
-              <p className="text-slate-400 text-[15px] leading-relaxed font-medium">{item.desc}</p>
+              <h3 className={`text-2xl font-black mb-4 tracking-tight bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>{item.title}</h3>
+              <p className="text-slate-500 text-[15px] leading-relaxed font-medium">{item.desc}</p>
             </motion.div>
           ))}
         </div>

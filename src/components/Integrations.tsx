@@ -141,15 +141,8 @@ export default function Integrations() {
             Elimine gargalos e transforme curiosos em orçamentos fechados com a potência da Inteligência Artificial.
           </p>
           
-          <motion.a 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            href="#contato" 
-            className="inline-flex px-10 py-5 bg-indigo-600 text-white font-black uppercase tracking-widest text-sm rounded-2xl shadow-2xl shadow-indigo-600/40 hover:bg-indigo-700 transition-all"
-          >
-            Começar Agora
-          </motion.a>
         </motion.div>
+
       </motion.div>
     </section>
   );
