@@ -74,13 +74,27 @@ export default function Integrations() {
           ].map((item, i) => (
             <React.Fragment key={item.name}>
               <motion.div
+                initial={{ opacity: 0, x: -20, y: 10 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
                 whileHover={{ y: -5, scale: 1.02 }}
                 className={`bg-white border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800 rounded-2xl px-6 py-4 monster-shadow glass flex items-center gap-3 text-sm font-bold text-slate-800 dark:text-white`}
               >
                 <div className={`w-3 h-3 rounded-full ${item.color} ${item.shadow} dark:shadow-none animate-pulse`}></div>
                 <span>{item.name}</span>
               </motion.div>
-              {i < 3 && <ArrowRight size={20} className="text-slate-300 dark:text-slate-700 hidden lg:block" />}
+              {i < 3 && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: (i * 0.1) + 0.1 }}
+                  className="hidden lg:block"
+                >
+                  <ArrowRight size={20} className="text-slate-300 dark:text-slate-700" />
+                </motion.div>
+              )}
             </React.Fragment>
           ))}
         </div>

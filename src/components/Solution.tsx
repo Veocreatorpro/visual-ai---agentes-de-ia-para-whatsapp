@@ -34,6 +34,7 @@ export default function Solution() {
                 key={i} 
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 className="flex items-center gap-4 text-[15px] font-bold text-slate-800 dark:text-slate-200"
               >
