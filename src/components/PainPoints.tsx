@@ -16,23 +16,32 @@ export default function PainPoints() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8 }}
-        className="bg-slate-900 rounded-[3rem] p-10 md:p-16 monster-shadow text-white dark:bg-slate-950 relative overflow-hidden"
+        className="bg-slate-900 rounded-[3rem] p-10 md:p-16 monster-shadow dark:bg-slate-950 relative overflow-hidden"
       >
         <div className="absolute -top-20 -left-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
         
-        <div className="max-w-2xl mb-14 relative z-10">
-          <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight">O Gargalo Final do <span className="text-indigo-400">WhatsApp</span></h2>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mb-14 relative z-10"
+        >
+          <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight text-white">O Gargalo Final do <span className="text-indigo-400">WhatsApp</span></h2>
           <p className="text-slate-400 text-lg leading-relaxed">
             Sua equipe técnica perde horas com perguntas repetitivas. É hora de automatizar a triagem e focar no que traz lucro.
           </p>
-        </div>
+        </motion.div>
         
         <div className="grid md:grid-cols-3 gap-6 relative z-10">
           {items.map((item, i) => (
             <motion.div 
-              key={i} 
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
               whileHover={{ y: -6, scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 300 }}
               className="bg-white rounded-[2rem] p-8 shadow-xl"
             >
               <div className={`w-12 h-12 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}>
