@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { Phone, Video, MoreVertical, Check, CheckCheck } from 'lucide-react';
 import robotLogo from '../assets/images/robot-logo.svg';
 
@@ -13,6 +13,16 @@ const chatMessages = [
 
 export default function Hero() {
   const [visibleMessages, setVisibleMessages] = useState(0);
+  const containerRef = React.useRef<HTMLElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const chatY = useTransform(scrollYProgress, [0, 1], [0, 50]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   useEffect(() => {
     if (visibleMessages < chatMessages.length) {
@@ -27,20 +37,21 @@ export default function Hero() {
   }, [visibleMessages]);
 
   return (
-    <section id="inicio" className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4">
+    <section id="inicio" ref={containerRef} className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden">
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }} 
         animate={{ opacity: 1, scale: 1 }} 
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass"
+        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative"
       >
         <div className="flex flex-col lg:flex-row min-h-[520px]">
           {/* Left — Text Content */}
-          <div className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10">
+          <motion.div style={{ y: textY, opacity }} className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10 will-change-transform">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
+
               className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50/50 text-indigo-600 rounded-full text-xs font-bold tracking-wide uppercase mb-8 border border-indigo-100/50 w-fit dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/30"
             >
               ✨ Inteligência Visual para o seu negócio
@@ -73,10 +84,10 @@ export default function Hero() {
                 Como funciona
               </motion.a>
             </div>
-          </div>
+          </motion.div>
           
           {/* Right — Real WhatsApp-style Chat */}
-          <div className="flex-1 relative min-h-[420px] lg:min-h-full bg-slate-950 overflow-hidden flex items-center justify-center p-6">
+          <motion.div style={{ y: chatY, opacity }} className="flex-1 relative min-h-[420px] lg:min-h-full bg-slate-950 overflow-hidden flex items-center justify-center p-6 will-change-transform">
             {/* Background blur glows */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-[100px]"></div>
             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
@@ -179,7 +190,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

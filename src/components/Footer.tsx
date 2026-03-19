@@ -12,17 +12,23 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-3 gap-16 mb-16">
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <div className="flex items-center gap-3 text-2xl font-black text-white">
-              <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
-                <img src={robotLogo} alt="" className="w-7 h-7" />
-              </div>
-              <span className="gradient-text">Visual AI</span>
+            <div className="flex items-center gap-4 text-3xl font-black text-white">
+              {/* Identical Floating Glowing Robot from Hero */}
+              <motion.div 
+                animate={{ y: [0, -12, 0] }}
+                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-indigo-500/30 blur-xl rounded-full"></div>
+                <img src={robotLogo} alt="Visual AI" className="w-10 h-10 drop-shadow-[0_0_15px_rgba(99,102,241,0.6)] relative z-10" />
+              </motion.div>
+              <span className="gradient-text tracking-tighter">Visual AI</span>
             </div>
             <p className="text-[15px] leading-relaxed text-slate-400">
               Automação inteligente para assistências técnicas. <br />
@@ -31,10 +37,10 @@ export default function Footer() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
             <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Navegação</h3>
             <ul className="space-y-4 text-[14px]">
@@ -47,22 +53,22 @@ export default function Footer() {
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
             <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em]">Tecnologia & Segurança</h3>
             <div className="grid grid-cols-1 gap-4">
-              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 glass">
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 glass hover:bg-white/10 transition-colors">
                 <Shield size={20} className="text-indigo-400" /> 
                 <div className="text-xs">
                   <div className="text-white font-bold mb-0.5">Azure Cloud</div>
                   <div className="text-slate-500">Infraestrutura robusta</div>
                 </div>
               </div>
-              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 glass">
+              <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5 glass hover:bg-white/10 transition-colors">
                 <Lock size={20} className="text-indigo-400" /> 
                 <div className="text-xs">
                   <div className="text-white font-bold mb-0.5">GPT-4o</div>
@@ -82,9 +88,16 @@ export default function Footer() {
         >
           <span>&copy; {new Date().getFullYear()} Visual AI • Todos os direitos reservados</span>
           <div className="flex gap-4 items-center">
-            <span className="text-indigo-500/50">AZURE</span>
-            <span className="text-indigo-500/50">N8N</span>
-            <span className="text-indigo-500/50">AIRTABLE</span>
+            {['AZURE', 'N8N', 'AIRTABLE'].map((tech, idx) => (
+              <motion.span 
+                key={tech}
+                animate={{ opacity: [0.3, 0.7, 0.3] }}
+                transition={{ repeat: Infinity, duration: 3, delay: idx * 0.5 }}
+                className="text-indigo-500 font-black"
+              >
+                {tech}
+              </motion.span>
+            ))}
           </div>
         </motion.div>
       </div>
