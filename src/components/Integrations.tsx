@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { GitMerge, Database, Cloud, MessageCircle, ArrowRight, Shield } from 'lucide-react';
 import robotLogo from '../assets/images/robot-logo.svg';
 
@@ -39,23 +39,14 @@ const integrations = [
 ];
 
 export default function Integrations() {
-  const containerRef = useRef<HTMLElement>(null);
-  
-  // Setup real-time ultra-fluid parallax scroll
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const headerY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const cardsY = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const ctaY = useTransform(scrollYProgress, [0, 1], [80, -80]);
-
   return (
-    <section id="integracoes" ref={containerRef} className="py-20 max-w-7xl mx-auto px-4 overflow-hidden">
+    <section id="integracoes" className="py-20 max-w-7xl mx-auto px-4 overflow-hidden">
       {/* Header */}
       <motion.div 
-        style={{ y: headerY }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.1 }}
+        transition={{ duration: 0.6 }}
         className="text-center max-w-3xl mx-auto mb-16 will-change-transform"
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50/50 text-indigo-600 rounded-full text-[11px] font-bold uppercase tracking-widest mb-6 border border-indigo-100/50 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/30">
@@ -102,11 +93,15 @@ export default function Integrations() {
         ))}
       </div>
 
-      {/* Cards - ULTRA-FLUID PARALLAX */}
-      <motion.div style={{ y: cardsY }} className="grid md:grid-cols-2 gap-8 will-change-transform">
+      {/* Cards - STABLE REVEAL */}
+      <div className="grid md:grid-cols-2 gap-8">
         {integrations.map((item, i) => (
-          <div
+          <motion.div
             key={i}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
             className="bg-white border border-slate-100 rounded-[2.5rem] p-10 monster-shadow dark:bg-slate-900/40 dark:border-slate-800/50 glass hover:border-indigo-500/30 transition-all group"
           >
             <div className="flex items-start gap-6">
@@ -126,13 +121,16 @@ export default function Integrations() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
-      </motion.div>
+      </div>
 
-      {/* Bottom CTA Card - ULTRA-FLUID PARALLAX */}
+      {/* Bottom CTA Card - STABLE REVEAL */}
       <motion.div
-        style={{ y: ctaY }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false }}
+        transition={{ duration: 0.7 }}
         className="mt-20 bg-slate-950 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden monster-shadow will-change-transform"
       >
         <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>

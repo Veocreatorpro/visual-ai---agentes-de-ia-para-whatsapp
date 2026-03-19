@@ -24,24 +24,23 @@ export default function Hero() {
       const resetTimer = setTimeout(() => setVisibleMessages(0), 4000);
       return () => clearTimeout(resetTimer);
     }
-  }, [visibleMessages]);
-
-  return (
+  }, [v  return (
     <section id="inicio" className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden relative">
       <motion.div 
-        initial={{ opacity: 0, scale: 0.98 }} 
-        animate={{ opacity: 1, scale: 1 }} 
+        initial={{ opacity: 0, y: 20 }} 
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative will-change-transform"
+        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative h-[850px] lg:h-[580px] w-full"
       >
-        <div className="flex flex-col lg:flex-row lg:h-[580px]">
+        <div className="flex flex-col lg:flex-row h-full">
           {/* Left — Text Content */}
           <div className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10 w-full">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false }}
               transition={{ delay: 0.2 }}
-
               className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50/50 text-indigo-600 rounded-full text-xs font-bold tracking-wide uppercase mb-8 border border-indigo-100/50 w-fit dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/30"
             >
               ✨ Inteligência Visual para o seu negócio
@@ -77,7 +76,7 @@ export default function Hero() {
           </div>
           
           {/* Right — Real WhatsApp-style Chat */}
-          <div className="flex-1 relative lg:h-[580px] bg-slate-950 overflow-hidden flex items-center justify-center p-6 w-full">
+          <div className="flex-1 relative min-h-[400px] lg:h-full bg-slate-950 overflow-hidden flex items-center justify-center p-6 w-full">
             {/* Background blur glows */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-[100px]"></div>
             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
@@ -92,7 +91,7 @@ export default function Hero() {
             />
 
             {/* WhatsApp UI Shell */}
-            <div className="w-full max-w-[300px] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10" style={{ background: '#0d1117' }}>
+            <div className="w-full max-w-[280px] md:max-w-[300px] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10" style={{ background: '#0d1117' }}>
               {/* WhatsApp Top Bar */}
               <div className="flex items-center gap-3 px-4 py-3 border-b border-white/5" style={{ background: '#1a2332' }}>
                 <div className="relative">
@@ -111,7 +110,7 @@ export default function Hero() {
               </div>
 
               {/* WhatsApp Wallpaper */}
-              <div className="px-3 py-4 flex flex-col justify-end space-y-2 h-[340px] overflow-hidden" style={{ background: '#0a1628', backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 60%)' }}>
+              <div className="px-3 py-4 flex flex-col justify-end space-y-2 h-[320px] md:h-[340px] overflow-hidden" style={{ background: '#0a1628', backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 60%)' }}>
                 <div className="w-full flex flex-col justify-end gap-2">
                 {/* Day separator */}
                 <div className="flex justify-center mb-1">
