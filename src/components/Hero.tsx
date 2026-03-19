@@ -37,16 +37,17 @@ export default function Hero() {
   }, [visibleMessages]);
 
   return (
-    <section id="inicio" ref={containerRef} className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden">
+    <section id="inicio" ref={containerRef} className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden relative">
       <motion.div 
+        style={{ y: textY, opacity }}
         initial={{ opacity: 0, scale: 0.98 }} 
         animate={{ opacity: 1, scale: 1 }} 
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative"
+        className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative will-change-transform"
       >
         <div className="flex flex-col lg:flex-row min-h-[520px]">
           {/* Left — Text Content */}
-          <motion.div style={{ y: textY, opacity }} className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10 will-change-transform">
+          <div className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10 w-full">
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -84,10 +85,10 @@ export default function Hero() {
                 Como funciona
               </motion.a>
             </div>
-          </motion.div>
+          </div>
           
           {/* Right — Real WhatsApp-style Chat */}
-          <motion.div style={{ y: chatY, opacity }} className="flex-1 relative min-h-[420px] lg:min-h-full bg-slate-950 overflow-hidden flex items-center justify-center p-6 will-change-transform">
+          <div className="flex-1 relative min-h-[420px] lg:min-h-[580px] bg-slate-950 overflow-hidden flex items-center justify-center p-6 w-full">
             {/* Background blur glows */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-[100px]"></div>
             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
@@ -121,23 +122,25 @@ export default function Hero() {
               </div>
 
               {/* WhatsApp Wallpaper */}
-              <div className="px-3 py-4 space-y-2 min-h-[260px]" style={{ background: '#0a1628', backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 60%)' }}>
+              <div className="px-3 py-4 flex flex-col justify-end space-y-2 h-[340px] overflow-hidden" style={{ background: '#0a1628', backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 60%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.06) 0%, transparent 60%)' }}>
+                <div className="w-full flex flex-col justify-end gap-2">
                 {/* Day separator */}
-                <div className="flex justify-center mb-3">
+                <div className="flex justify-center mb-1">
                   <span className="text-[10px] rounded-full px-3 py-0.5 font-medium" style={{ background: 'rgba(255,255,255,0.07)', color: '#8899aa' }}>HOJE</span>
                 </div>
 
-                <AnimatePresence>
+                <AnimatePresence mode="popLayout">
                   {chatMessages.slice(0, visibleMessages).map((msg, i) => (
                     <motion.div
+                      layout
                       key={i}
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      initial={{ opacity: 0, y: 15, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      transition={{ type: "spring", stiffness: 180, damping: 18 }}
-                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                      transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                      className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} w-full shrink-0`}
                     >
                       <div
-                        className={`max-w-[82%] px-3 py-2 rounded-2xl text-[12px] leading-relaxed relative shadow-md ${
+                        className={`max-w-[85%] px-3 py-2 rounded-2xl text-[12px] leading-relaxed relative shadow-md ${
                           msg.role === 'user'
                             ? 'text-white rounded-tr-sm'
                             : 'text-white rounded-tl-sm'
@@ -158,6 +161,7 @@ export default function Hero() {
                     </motion.div>
                   ))}
                 </AnimatePresence>
+                </div>
 
                 {/* Typing indicator */}
                 {visibleMessages < chatMessages.length && visibleMessages > 0 && (
@@ -190,7 +194,7 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </section>

@@ -14,7 +14,7 @@ export default function Footer() {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: false, amount: 0.1, margin: "-50px" }}
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
@@ -39,7 +39,7 @@ export default function Footer() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: false, amount: 0.1, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <h3 className="text-white font-bold text-xs uppercase tracking-[0.2em] mb-8">Navegação</h3>
@@ -55,7 +55,7 @@ export default function Footer() {
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: false, amount: 0.1, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
@@ -82,7 +82,7 @@ export default function Footer() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           className="pt-10 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-slate-600"
         >

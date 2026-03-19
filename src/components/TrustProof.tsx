@@ -14,7 +14,7 @@ export default function TrustProof() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, amount: 0.1, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         className="gradient-bg rounded-[3.5rem] p-10 md:p-20 monster-shadow text-white border border-white/10 relative overflow-hidden"
       >
@@ -24,7 +24,7 @@ export default function TrustProof() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="relative z-10 text-center max-w-3xl mx-auto mb-16"
         >
@@ -38,7 +38,7 @@ export default function TrustProof() {
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: false, amount: 0.1, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               whileHover={{ y: -6, scale: 1.02 }}
               className="bg-white rounded-[2.5rem] p-10 text-center shadow-xl"

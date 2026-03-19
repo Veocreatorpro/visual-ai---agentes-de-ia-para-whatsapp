@@ -12,7 +12,7 @@ export default function TargetAudience() {
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, amount: 0.1, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         className="bg-slate-950 rounded-[3.5rem] p-10 md:p-20 monster-shadow text-white border border-white/5 relative overflow-hidden"
       >

@@ -15,7 +15,7 @@ export default function HowItWorks() {
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, amount: 0.1, margin: "-100px" }}
         className="bg-white rounded-[3rem] p-10 md:p-16 monster-shadow border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800/50 glass relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl"></div>
@@ -30,7 +30,7 @@ export default function HowItWorks() {
               key={i}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.1 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               className="text-center group"
             >

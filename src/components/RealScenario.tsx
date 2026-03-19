@@ -8,7 +8,7 @@ export default function RealScenario() {
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, amount: 0.1, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         className="bg-white rounded-[3rem] p-10 md:p-20 monster-shadow border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800/50 glass relative overflow-hidden"
       >

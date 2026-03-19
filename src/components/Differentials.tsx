@@ -14,7 +14,7 @@ export default function Differentials() {
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, amount: 0.1, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         className="bg-slate-900 rounded-[3rem] p-10 md:p-20 monster-shadow border border-white/5 dark:bg-slate-950 relative overflow-hidden"
       >
@@ -23,7 +23,7 @@ export default function Differentials() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.1 }}
           transition={{ duration: 0.6 }}
           className="max-w-3xl mb-16 relative z-10"
         >
@@ -40,7 +40,7 @@ export default function Differentials() {
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: false, amount: 0.1, margin: "-60px" }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               whileHover={{ y: -6, scale: 1.02 }}
               className="bg-white rounded-[2.5rem] p-10 shadow-xl"

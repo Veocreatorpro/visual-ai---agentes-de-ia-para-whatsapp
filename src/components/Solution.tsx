@@ -10,7 +10,7 @@ export default function Solution() {
         <motion.div 
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.8 }}
           className="bg-white rounded-[2.5rem] p-10 md:p-14 monster-shadow border border-slate-100 flex flex-col justify-center dark:bg-slate-900/40 dark:border-slate-800/50 glass relative overflow-hidden"
         >
@@ -34,7 +34,7 @@ export default function Solution() {
                 key={i} 
                 initial={{ opacity: 0, x: -10 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.1 }}
                 transition={{ delay: i * 0.1 }}
                 className="flex items-center gap-4 text-[15px] font-bold text-slate-800 dark:text-slate-200"
               >
@@ -50,7 +50,7 @@ export default function Solution() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.8 }}
           className="rounded-[3rem] overflow-hidden monster-shadow relative min-h-[400px] border-4 border-white dark:border-slate-800"
         >

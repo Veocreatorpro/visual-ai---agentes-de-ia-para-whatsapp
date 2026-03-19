@@ -81,11 +81,13 @@ export default function Integrations() {
             <motion.div
               animate={{ y: [0, -12, 0] }}
               transition={{ repeat: Infinity, duration: 3 + (i * 0.5), ease: "easeInOut" }}
-              whileHover={{ scale: 1.05 }}
-              className={`bg-white border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800 rounded-2xl px-6 py-4 monster-shadow glass flex items-center gap-3 text-sm font-bold text-slate-800 dark:text-white will-change-transform cursor-pointer`}
             >
-              <div className={`w-3 h-3 rounded-full ${item.color} ${item.shadow} dark:shadow-none animate-pulse`}></div>
-              <span>{item.name}</span>
+              <div
+                className={`bg-white border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800 rounded-2xl px-6 py-4 monster-shadow glass flex items-center gap-3 text-sm font-bold text-slate-800 dark:text-white cursor-pointer hover:scale-110 hover:-translate-y-2 hover:shadow-indigo-500/20 transition-all duration-300`}
+              >
+                <div className={`w-3 h-3 rounded-full ${item.color} ${item.shadow} dark:shadow-none animate-pulse`}></div>
+                <span>{item.name}</span>
+              </div>
             </motion.div>
             {i < 3 && (
               <motion.div
