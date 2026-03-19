@@ -13,16 +13,6 @@ const chatMessages = [
 
 export default function Hero() {
   const [visibleMessages, setVisibleMessages] = useState(0);
-  const containerRef = React.useRef<HTMLElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-
-  const textY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const chatY = useTransform(scrollYProgress, [0, 1], [0, 50]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.2]);
 
   useEffect(() => {
     if (visibleMessages < chatMessages.length) {
@@ -37,15 +27,14 @@ export default function Hero() {
   }, [visibleMessages]);
 
   return (
-    <section id="inicio" ref={containerRef} className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden relative">
+    <section id="inicio" className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden relative">
       <motion.div 
-        style={{ y: textY, opacity }}
         initial={{ opacity: 0, scale: 0.98 }} 
         animate={{ opacity: 1, scale: 1 }} 
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative will-change-transform"
       >
-        <div className="flex flex-col lg:flex-row min-h-[520px]">
+        <div className="flex flex-col lg:flex-row lg:h-[580px]">
           {/* Left — Text Content */}
           <div className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10 w-full">
             <motion.div 
@@ -88,7 +77,7 @@ export default function Hero() {
           </div>
           
           {/* Right — Real WhatsApp-style Chat */}
-          <div className="flex-1 relative min-h-[420px] lg:min-h-[580px] bg-slate-950 overflow-hidden flex items-center justify-center p-6 w-full">
+          <div className="flex-1 relative lg:h-[580px] bg-slate-950 overflow-hidden flex items-center justify-center p-6 w-full">
             {/* Background blur glows */}
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-indigo-600/20 rounded-full blur-[100px]"></div>
             <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-600/20 rounded-full blur-[100px]"></div>
