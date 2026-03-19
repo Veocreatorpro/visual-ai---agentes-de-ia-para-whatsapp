@@ -3,6 +3,8 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import { Phone, Video, MoreVertical, Check, CheckCheck } from 'lucide-react';
 import robotLogo from '../assets/images/robot-logo.svg';
 
+import Magnetic from './Magnetic';
+
 const chatMessages = [
   { role: 'user' as const, text: 'Oi, a tela do meu S22 Ultra quebrou 😔', time: '14:02' },
   { role: 'agent' as const, text: 'Olá! Lamento 😕 Temos a peça original em estoque 📱', time: '14:02' },
@@ -10,6 +12,29 @@ const chatMessages = [
   { role: 'user' as const, text: 'Sim! Consigo levar agora?', time: '14:03' },
   { role: 'agent' as const, text: '✅ Horário às 14h disponível! Vou encaminhar pro técnico.', time: '14:03' },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring" as const,
+      stiffness: 120,
+      damping: 20,
+      staggerChildren: 0.15
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { type: "spring" as const, stiffness: 150, damping: 20 }
+  }
+};
 
 export default function Hero() {
   const [visibleMessages, setVisibleMessages] = useState(0);
@@ -29,52 +54,49 @@ export default function Hero() {
   return (
     <section id="inicio" className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden relative">
       <motion.div 
-        initial={{ opacity: 0, y: 20 }} 
-        whileInView={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: false, amount: 0.1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        variants={containerVariants}
         className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden dark:bg-slate-900/40 dark:border-slate-800/50 glass relative h-[850px] lg:h-[580px] w-full"
       >
         <div className="flex flex-col lg:flex-row h-full">
           {/* Left — Text Content */}
           <div className="p-8 md:p-14 lg:p-16 flex-1 flex flex-col justify-center relative z-10 w-full">
             <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false }}
-              transition={{ delay: 0.2 }}
+              variants={itemVariants}
               className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50/50 text-indigo-600 rounded-full text-xs font-bold tracking-wide uppercase mb-8 border border-indigo-100/50 w-fit dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/30"
             >
               ✨ Inteligência Visual para o seu negócio
             </motion.div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-bold text-slate-900 leading-[1] mb-6 dark:text-white">
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl lg:text-[4rem] font-bold text-slate-900 leading-[1] mb-6 dark:text-white">
               Seu WhatsApp no <br />
               <span className="gradient-text">piloto automático.</span>
-            </h1>
+            </motion.h1>
             
-            <p className="text-lg md:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed dark:text-slate-400">
+            <motion.p variants={itemVariants} className="text-lg md:text-xl text-slate-500 mb-10 max-w-lg leading-relaxed dark:text-slate-400">
               Agentes de IA que triam, orçam e organizam o atendimento da sua assistência técnica, 24 horas por dia.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.a 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href="#contato" 
-                className="px-8 py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all text-center"
-              >
-                Ver demonstração
-              </motion.a>
-              <motion.a 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href="#integracoes" 
-                className="px-8 py-4 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all text-center dark:bg-slate-800/40 dark:text-white dark:border-slate-700 glass"
-              >
-                Como funciona
-              </motion.a>
-            </div>
+            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4">
+              <Magnetic strength={0.2}>
+                <a 
+                  href="#contato" 
+                  className="px-8 py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all text-center inline-block"
+                >
+                  Ver demonstração
+                </a>
+              </Magnetic>
+              <Magnetic strength={0.2}>
+                <a 
+                  href="#integracoes" 
+                  className="px-8 py-4 bg-white text-slate-900 font-bold rounded-2xl border border-slate-200 hover:bg-slate-50 transition-all text-center dark:bg-slate-800/40 dark:text-white dark:border-slate-700 glass inline-block"
+                >
+                  Como funciona
+                </a>
+              </Magnetic>
+            </motion.div>
           </div>
           
           {/* Right — Real WhatsApp-style Chat */}

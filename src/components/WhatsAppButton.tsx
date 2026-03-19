@@ -191,7 +191,6 @@ export default function WhatsAppButton() {
           } catch (e) {}
         }}
         transition={{ duration: 0.2, ease: 'easeOut' }}
-
       >
         <motion.span
           className="relative"

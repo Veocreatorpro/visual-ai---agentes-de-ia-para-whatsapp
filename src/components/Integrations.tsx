@@ -38,6 +38,33 @@ const integrations = [
   },
 ];
 
+import Magnetic from './Magnetic';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 100,
+      damping: 15
+    }
+  }
+};
+
 export default function Integrations() {
   return (
     <section id="integracoes" className="py-20 max-w-7xl mx-auto px-4 overflow-hidden">
@@ -46,7 +73,7 @@ export default function Integrations() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.1 }}
-        transition={{ duration: 0.6 }}
+        transition={{ type: "spring" as const, stiffness: 100, damping: 20 }}
         className="text-center max-w-3xl mx-auto mb-16 will-change-transform"
       >
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50/50 text-indigo-600 rounded-full text-[11px] font-bold uppercase tracking-widest mb-6 border border-indigo-100/50 dark:bg-indigo-900/20 dark:text-indigo-400 dark:border-indigo-800/30">
@@ -60,7 +87,7 @@ export default function Integrations() {
         </p>
       </motion.div>
 
-      {/* Icons Flow - CONSTANT FLOATING ANIMATION */}
+      {/* Icons Flow - CONSTANT FLOATING ANIMATION with MAGNETIC */}
       <div className="flex flex-wrap items-center justify-center gap-4 mb-20 px-4">
         {[
           { name: 'WhatsApp', color: 'bg-green-500', shadow: 'shadow-green-200' },
@@ -69,17 +96,19 @@ export default function Integrations() {
           { name: 'Airtable CRM', color: 'bg-yellow-500', shadow: 'shadow-yellow-200' },
         ].map((item, i) => (
           <React.Fragment key={item.name}>
-            <motion.div
-              animate={{ y: [0, -12, 0] }}
-              transition={{ repeat: Infinity, duration: 3 + (i * 0.5), ease: "easeInOut" }}
-            >
-              <div
-                className={`bg-white border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800 rounded-2xl px-6 py-4 monster-shadow glass flex items-center gap-3 text-sm font-bold text-slate-800 dark:text-white cursor-pointer hover:scale-110 hover:-translate-y-2 hover:shadow-indigo-500/20 transition-all duration-300`}
+            <Magnetic strength={0.3}>
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ repeat: Infinity, duration: 3 + (i * 0.5), ease: "easeInOut" }}
               >
-                <div className={`w-3 h-3 rounded-full ${item.color} ${item.shadow} dark:shadow-none animate-pulse`}></div>
-                <span>{item.name}</span>
-              </div>
-            </motion.div>
+                <div
+                  className={`bg-white border border-slate-100 dark:bg-slate-900/40 dark:border-slate-800 rounded-2xl px-6 py-4 monster-shadow glass flex items-center gap-3 text-sm font-bold text-slate-800 dark:text-white cursor-pointer hover:scale-105 transition-all duration-300`}
+                >
+                  <div className={`w-3 h-3 rounded-full ${item.color} ${item.shadow} dark:shadow-none animate-pulse`}></div>
+                  <span>{item.name}</span>
+                </div>
+              </motion.div>
+            </Magnetic>
             {i < 3 && (
               <motion.div
                 animate={{ x: [0, 5, 0], opacity: [0.5, 1, 0.5] }}
@@ -93,15 +122,18 @@ export default function Integrations() {
         ))}
       </div>
 
-      {/* Cards - STABLE REVEAL */}
-      <div className="grid md:grid-cols-2 gap-8">
+      {/* Cards - STABLE REVEAL with STAGGER */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.1 }}
+        className="grid md:grid-cols-2 gap-8"
+      >
         {integrations.map((item, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            whileInView={{ opacity: 1, scale: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.1 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            variants={itemVariants}
             className="bg-white border border-slate-100 rounded-[2.5rem] p-10 monster-shadow dark:bg-slate-900/40 dark:border-slate-800/50 glass hover:border-indigo-500/30 transition-all group"
           >
             <div className="flex items-start gap-6">
@@ -123,14 +155,14 @@ export default function Integrations() {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Bottom CTA Card - STABLE REVEAL */}
+      {/* Bottom CTA Card - STABLE REVEAL with SPRING */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false }}
-        transition={{ duration: 0.7 }}
+        transition={{ type: "spring" as const, stiffness: 80, damping: 20 }}
         className="mt-20 bg-slate-950 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden monster-shadow will-change-transform"
       >
         <div className="absolute top-0 left-0 w-full h-full opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>

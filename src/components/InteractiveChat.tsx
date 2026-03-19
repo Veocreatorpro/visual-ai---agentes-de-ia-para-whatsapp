@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Send, MessageCircle, RotateCw } from 'lucide-react';
 import robotLogo from '../assets/images/robot-logo.svg';
+import Magnetic from './Magnetic';
 
 // Foolproof URL logic: if not localhost, we use the Azure Backend
 const API_URL = window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1')
@@ -15,7 +16,6 @@ export default function InteractiveChat() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const sessionIdRef = useRef<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when messages change
@@ -79,10 +79,10 @@ export default function InteractiveChat() {
   return (
     <section id="contato" className="py-20 max-w-6xl mx-auto px-4">
       <motion.div 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.1, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
+        initial={{ opacity: 0, scale: 0.98 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: false, amount: 0.1 }}
+        transition={{ type: "spring" as const, stiffness: 80, damping: 20 }}
         className="bg-white rounded-[2.5rem] monster-shadow border border-slate-100 overflow-hidden grid md:grid-cols-2 dark:bg-slate-900/40 dark:border-slate-800/50 glass"
       >
         {/* Left side — Info */}
@@ -154,31 +154,37 @@ export default function InteractiveChat() {
                 </div>
               </div>
             </div>
-            <button
-              onClick={handleReset}
-              className="p-2.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-xl transition-all"
-              title="Reiniciar Simulação"
-            >
-              <RotateCw size={16} />
-            </button>
+            <Magnetic strength={0.4}>
+              <button
+                onClick={handleReset}
+                className="p-2.5 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-xl transition-all"
+                title="Reiniciar Simulação"
+              >
+                <RotateCw size={16} />
+              </button>
+            </Magnetic>
           </div>
           
           {/* Messages Area */}
           <div ref={chatContainerRef} className="flex-1 p-5 overflow-y-auto flex flex-col gap-4 bg-slate-50/30 dark:bg-slate-950/20 scroll-smooth">
-            {messages.map((msg, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                className={`max-w-[85%] p-4 rounded-[1.5rem] text-[14px] leading-relaxed shadow-sm whitespace-pre-line ${ 
-                  msg.role === 'user' 
-                    ? 'bg-white text-slate-800 rounded-tr-none border border-slate-200 self-end dark:bg-slate-800 dark:text-white dark:border-slate-700' 
-                    : 'gradient-bg text-white rounded-tl-none self-start shadow-indigo-200 dark:shadow-none' 
-                }`}
-              >
-                {msg.text}
-              </motion.div>
-            ))}
+            <AnimatePresence mode="popLayout">
+              {messages.map((msg, i) => (
+                <motion.div 
+                  layout
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                  className={`max-w-[85%] p-4 rounded-[1.5rem] text-[14px] leading-relaxed shadow-sm whitespace-pre-line ${ 
+                    msg.role === 'user' 
+                      ? 'bg-white text-slate-800 rounded-tr-none border border-slate-200 self-end dark:bg-slate-800 dark:text-white dark:border-slate-700' 
+                      : 'gradient-bg text-white rounded-tl-none self-start shadow-indigo-200 dark:shadow-none' 
+                  }`}
+                >
+                  {msg.text}
+                </motion.div>
+              ))}
+            </AnimatePresence>
             {isLoading && (
               <motion.div 
                 initial={{ opacity: 0 }} 
@@ -191,7 +197,6 @@ export default function InteractiveChat() {
                 <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
               </motion.div>
             )}
-            <div ref={messagesEndRef} />
           </div>
           
           {/* Input Area */}
@@ -206,13 +211,17 @@ export default function InteractiveChat() {
                 className="w-full pl-5 pr-12 py-3.5 bg-slate-100 border-none rounded-2xl text-[14px] outline-none focus:ring-2 focus:ring-indigo-500/20 dark:bg-slate-800 dark:text-white dark:placeholder:text-slate-500 transition-all font-medium"
                 disabled={isLoading}
               />
-              <button 
-                onClick={handleSend}
-                disabled={isLoading || !input.trim()}
-                className="absolute right-2 top-1.5 w-10 h-10 gradient-bg text-white rounded-xl flex items-center justify-center hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-95"
-              >
-                <Send size={16} />
-              </button>
+              <div className="absolute right-2 top-1.5">
+                <Magnetic strength={0.3}>
+                  <button 
+                    onClick={handleSend}
+                    disabled={isLoading || !input.trim()}
+                    className="w-10 h-10 gradient-bg text-white rounded-xl flex items-center justify-center hover:opacity-90 disabled:opacity-50 transition-all shadow-md active:scale-95"
+                  >
+                    <Send size={16} />
+                  </button>
+                </Magnetic>
+              </div>
             </div>
           </div>
         </div>

@@ -4,14 +4,38 @@ import { CheckCircle2 } from 'lucide-react';
 import solutionImg from '../assets/images/solution.png';
 
 export default function Solution() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring" as const,
+        stiffness: 100,
+        damping: 15
+      }
+    }
+  };
+
   return (
     <section id="solucao" className="py-20 max-w-6xl mx-auto px-4">
       <div className="grid md:grid-cols-2 gap-10 items-center">
         <motion.div 
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: false, amount: 0.1, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ type: "spring" as const, stiffness: 80, damping: 20 }}
           className="bg-white rounded-[2.5rem] p-10 md:p-14 monster-shadow border border-slate-100 flex flex-col justify-center dark:bg-slate-900/40 dark:border-slate-800/50 glass relative overflow-hidden"
         >
           <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl"></div>
@@ -23,7 +47,12 @@ export default function Solution() {
             Treinamos a IA com as regras da sua assistência. Ela atende como o seu melhor vendedor, 24 horas por dia, sem folgas.
           </p>
           
-          <ul className="space-y-5">
+          <motion.ul 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            className="space-y-5"
+          >
             {[
               "Identifica o modelo do aparelho e o defeito",
               "Informa disponibilidade de peças",
@@ -32,10 +61,7 @@ export default function Solution() {
             ].map((text, i) => (
               <motion.li 
                 key={i} 
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false, amount: 0.1 }}
-                transition={{ delay: i * 0.1 }}
+                variants={itemVariants}
                 className="flex items-center gap-4 text-[15px] font-bold text-slate-800 dark:text-slate-200"
               >
                 <div className="w-6 h-6 rounded-full gradient-bg flex items-center justify-center text-white shadow-sm">
@@ -44,14 +70,14 @@ export default function Solution() {
                 {text}
               </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </motion.div>
         
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: false, amount: 0.1, margin: "-100px" }}
-          transition={{ duration: 0.8 }}
+          viewport={{ once: false, amount: 0.1 }}
+          transition={{ type: "spring" as const, stiffness: 60, damping: 20 }}
           className="rounded-[3rem] overflow-hidden monster-shadow relative min-h-[400px] border-4 border-white dark:border-slate-800"
         >
           <img src={solutionImg} alt="IA reparando eletrônicos" className="absolute inset-0 w-full h-full object-cover scale-110" />

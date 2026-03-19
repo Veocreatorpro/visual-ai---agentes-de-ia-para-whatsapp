@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 
 import AdminDashboard from './components/AdminDashboard';
+import SmoothScroll from './components/SmoothScroll';
 
 export default function App() {
   const [isAdmin, setIsAdmin] = React.useState(window.location.hash === '#admin-master');
@@ -32,20 +33,22 @@ export default function App() {
 
   return (
     <div className="min-h-screen font-sans text-slate-900 bg-[#fafafa] dark:bg-slate-950 dark:text-white transition-colors duration-500">
-      <Header />
-      <main className="flex flex-col gap-0">
-        <Hero />
-        <PainPoints />
-        <Solution />
-        <TargetAudience />
-        <Differentials />
-        <Integrations />
-        <RealScenario />
-        <HowItWorks />
-        <TrustProof />
-        <InteractiveChat />
-      </main>
-      <Footer />
+      <SmoothScroll>
+        <Header />
+        <main className="flex flex-col gap-0">
+          <Hero />
+          <PainPoints />
+          <Solution />
+          <TargetAudience />
+          <Differentials />
+          <Integrations />
+          <RealScenario />
+          <HowItWorks />
+          <TrustProof />
+          <InteractiveChat />
+        </main>
+        <Footer />
+      </SmoothScroll>
       <WhatsAppButton />
     </div>
   );
