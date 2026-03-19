@@ -24,7 +24,9 @@ export default function Hero() {
       const resetTimer = setTimeout(() => setVisibleMessages(0), 4000);
       return () => clearTimeout(resetTimer);
     }
-  }, [v  return (
+  }, [visibleMessages]);
+
+  return (
     <section id="inicio" className="pt-24 md:pt-32 pb-8 max-w-7xl mx-auto px-4 overflow-hidden relative">
       <motion.div 
         initial={{ opacity: 0, y: 20 }} 
