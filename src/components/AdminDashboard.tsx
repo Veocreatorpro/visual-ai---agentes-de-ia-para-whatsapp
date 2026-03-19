@@ -10,7 +10,12 @@ export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [activeTab, setActiveTab] = useState<'stats' | 'settings'>('stats');
-  const [prompt, setPrompt] = useState('Você é um assistente de vendas da Visual AI. Seja curto e direto.');
+  const [config, setConfig] = useState({
+    core: 'Você é o Agente de Elite da Visual AI.',
+    general: 'Ajude o cliente com dúvidas gerais.',
+    pricing: 'TABELA DE PREÇOS: iPhone (450+)',
+    repairs: 'REPAROS: Telas e baterias.'
+  });
   const [stats, setStats] = useState({ clicks: 0, chats: 0 });
   const [status, setStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const [isDeploying, setIsDeploying] = useState({ github: false, azure: false });
@@ -30,18 +35,17 @@ export default function AdminDashboard() {
     if (localStorage.getItem('admin_auth') === 'true') {
       setIsAuthenticated(true);
     }
-    fetchStats();
+    fetchData();
   }, [isAuthenticated]);
 
-  const fetchStats = async () => {
+  const fetchData = async () => {
     if (!isAuthenticated) return;
     try {
-      const res = await fetch(`${API_URL}/api/admin/stats`);
-      const data = await res.json();
-      setStats(data);
-    } catch (e) {
-      console.error('Error fetching stats:', e);
-    }
+      const sRes = await fetch(`${API_URL}/api/admin/stats`);
+      setStats(await sRes.json());
+      const cRes = await fetch(`${API_URL}/api/admin/config`);
+      setConfig(await cRes.json());
+    } catch (e) { console.error(e); }
   };
 
   const handleSaveSettings = async () => {
@@ -49,14 +53,10 @@ export default function AdminDashboard() {
       const res = await fetch(`${API_URL}/api/admin/config`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt })
+        body: JSON.stringify(config)
       });
-      if (res.ok) {
-        setStatus({ type: 'success', message: 'Configurações salvas com sucesso!' });
-      }
-    } catch (e) {
-      setStatus({ type: 'error', message: 'Erro ao salvar configurações.' });
-    }
+      if (res.ok) setStatus({ type: 'success', message: 'Configurações salvas!' });
+    } catch (e) { setStatus({ type: 'error', message: 'Erro ao salvar.' }); }
     setTimeout(() => setStatus(null), 3000);
   };
 
@@ -254,32 +254,73 @@ export default function AdminDashboard() {
               </div>
             </div>
           ) : (
-            <div className="max-w-4xl">
+            <div className="max-w-4xl space-y-8">
               <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 shadow-xl">
                 <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-lg font-bold">Instruções do Agente AI</h3>
+                  <h3 className="text-lg font-bold">Fluxo do Agente AI (Cérebro)</h3>
                   <button 
                     onClick={handleSaveSettings}
                     className="bg-teal-600 hover:bg-teal-500 px-6 py-2 rounded-xl font-bold flex items-center gap-2 transition-all"
                   >
-                    <Save className="w-5 h-5" /> Salvar Alterações
+                    <Save className="w-5 h-5" /> Salvar Tudo
                   </button>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-400 mb-2 uppercase tracking-widest">Prompt do Sistema (O que ele deve ser)</label>
-                  <textarea 
-                    value={prompt}
-                    onChange={(e) => setPrompt(e.target.value)}
-                    rows={8}
-                    className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-teal-500 outline-none transition-all font-mono text-sm leading-relaxed"
-                    placeholder="Ex: Você é um vendedor especializado..."
-                  />
-                  <div className="mt-4 p-4 bg-teal-500/5 border border-teal-500/10 rounded-xl">
-                    <p className="text-xs text-slate-400 flex items-center gap-2 leading-relaxed">
-                      <AlertCircle className="w-4 h-4 text-teal-500 shrink-0" />
-                      Dica: Mudanças no prompt entram em vigor imediatamente após salvar. Não é necessário dar deploy no código para testar novas conversas.
-                    </p>
+                
+                <div className="space-y-6">
+                  {/* Core Rules */}
+                  <div>
+                    <label className="block text-xs font-bold text-teal-400 mb-2 uppercase tracking-widest">1. Regras Fixas (Core)</label>
+                    <textarea 
+                      value={config.core}
+                      onChange={(e) => setConfig({...config, core: e.target.value})}
+                      rows={3}
+                      className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-teal-500 outline-none transition-all font-mono text-sm"
+                      placeholder="Regras de segurança e tom de voz..."
+                    />
                   </div>
+
+                  {/* General */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">2. Conhecimento Geral</label>
+                    <textarea 
+                      value={config.general}
+                      onChange={(e) => setConfig({...config, general: e.target.value})}
+                      rows={3}
+                      className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-teal-500 outline-none transition-all font-mono text-sm"
+                      placeholder="Informações básicas da empresa..."
+                    />
+                  </div>
+
+                  {/* Pricing */}
+                  <div>
+                    <label className="block text-xs font-bold text-yellow-500/80 mb-2 uppercase tracking-widest">3. Tabela de Preços (Seção de Vendas)</label>
+                    <textarea 
+                      value={config.pricing}
+                      onChange={(e) => setConfig({...config, pricing: e.target.value})}
+                      rows={4}
+                      className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-teal-500 outline-none transition-all font-mono text-sm"
+                      placeholder="Valores de serviços e produtos..."
+                    />
+                  </div>
+
+                  {/* Repairs */}
+                  <div>
+                    <label className="block text-xs font-bold text-blue-400 mb-2 uppercase tracking-widest">4. Conhecimento de Reparos</label>
+                    <textarea 
+                      value={config.repairs}
+                      onChange={(e) => setConfig({...config, repairs: e.target.value})}
+                      rows={4}
+                      className="w-full bg-slate-800 border border-slate-700 rounded-xl p-4 text-slate-200 focus:ring-2 focus:ring-teal-500 outline-none transition-all font-mono text-sm"
+                      placeholder="Detalhes técnicos sobre consertos..."
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-8 p-4 bg-teal-500/5 border border-teal-500/10 rounded-xl">
+                  <p className="text-xs text-slate-400 flex items-center gap-2 leading-relaxed">
+                    <AlertCircle className="w-4 h-4 text-teal-500 shrink-0" />
+                    Otimização Ativa: O sistema agora decide automaticamente qual seção carregar baseada na pergunta do cliente, economizando tokens e mantendo a conversa focada.
+                  </p>
                 </div>
               </div>
             </div>
