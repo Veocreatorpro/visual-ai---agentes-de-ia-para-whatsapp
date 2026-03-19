@@ -86,7 +86,7 @@ export default function Footer() {
             <span className="text-indigo-500/50">N8N</span>
             <span className="text-indigo-500/50">AIRTABLE</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
